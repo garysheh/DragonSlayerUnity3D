@@ -22,7 +22,7 @@
 [Aa]ssets/Plugins/Editor/JetBrains*
 
 # Unity Layouts
-UserSettings/Layouts/
+UserSettings/Layouts/*.dwlt
 
 # Visual Studio cache directory
 .vs/
