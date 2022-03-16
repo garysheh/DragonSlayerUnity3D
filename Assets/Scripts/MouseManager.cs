@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
-[System.Serializable]
-public class EventVector3 : UnityEvent<Vector3> { }
 public class MouseManager : MonoBehaviour
 {
+    public static MouseManager Instance;
     RaycastHit hitInfo;
-    public EventVector3 OnMouseClicked;
+
+    public event Action<Vector3> OnMouseClicked;
+
+    void Awake()
+    {
+        if (Instance != null)
+            Destroy(gameObject);
+
+        Instance = this;
+    }
+
     void Update() {
         SetCursorTexture();
         MouseControl();
