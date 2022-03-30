@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class MouseManager : MonoBehaviour
+public class MouseController : MonoBehaviour
 {
-    public static MouseManager Instance;
-    RaycastHit hitInfo;
+    public static MouseController Instance;
 
-    public event Action<Vector3> OnMouseClicked;
+    public Texture2D finger, attack, transport;
+    RaycastHit hitInfo;
+    // Singleton Pattern
+    public event Action<Vector3> OnMouseClicked; // event is the delegate generic class of Action
+                                                 // so it doesn't need to be defined again in other places.
 
     void Awake()
     {
