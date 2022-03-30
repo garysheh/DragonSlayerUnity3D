@@ -7,7 +7,7 @@ public class MouseController : MonoBehaviour
 {
     public static MouseController Instance;
 
-    public Texture2D finger, attack, transport;
+    public Texture2D finger, attack, transport, talk;
     RaycastHit hitInfo;
     // Singleton Pattern
     public event Action<Vector3> OnMouseClicked; // event is the delegate generic class of Action
@@ -33,6 +33,13 @@ public class MouseController : MonoBehaviour
         if(Physics.Raycast(ray, out hitInfo))
         {
             // Changing mouse texture
+            switch (hitInfo.collider.gameObject.tag)
+            {
+                case "Ground":
+                    Cursor.SetCursor(finger, new Vector2(16, 16), CursorMode.Auto);
+                    break;
+
+            }
         }
     }
 
