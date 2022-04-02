@@ -7,10 +7,21 @@ public class PlayerController : MonoBehaviour
 {
     
     private NavMeshAgent agent;
+    private Animator animator;
 
+    void Update()
+    {
+        AnimationControl();
+    }
+
+    void AnimationControl()
+    {
+        animator.SetFloat("Speed",agent.velocity.sqrMagnitude);
+    }
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>(); 
     }
 
     void Start()
