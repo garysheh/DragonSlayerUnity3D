@@ -24,6 +24,12 @@
 # Unity Layouts
 UserSettings/Layouts/
 
+# Polybrush settings
+ProjectSettings/Packages/com.unity.polybrush/
+
+# probuilder settings
+ProjectSettings/Packages/com.unity.probuilder/
+
 # Visual Studio cache directory
 .vs/
 
