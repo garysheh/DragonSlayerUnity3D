@@ -13,6 +13,9 @@ public class MouseController : MonoBehaviour
     public event Action<Vector3> OnMouseClicked; // event is the delegate generic class of Action
                                                  // so it doesn't need to be defined again in other places.
 
+    public event Action<GameObject> OnEnemyClciked;
+
+
     void Awake()
     {
         if (Instance != null)
@@ -38,7 +41,9 @@ public class MouseController : MonoBehaviour
                 case "Ground":
                     Cursor.SetCursor(finger, new Vector2(16, 16), CursorMode.Auto);
                     break;
-
+                case "Enemy":
+                    Cursor.SetCursor(attack, new Vector2(16, 16), CursorMode.Auto);
+                    break;
             }
         }
     }
@@ -49,6 +54,10 @@ public class MouseController : MonoBehaviour
             if(hitInfo.collider.gameObject.CompareTag("Ground"))
             {
                 OnMouseClicked?.Invoke(hitInfo.point);
+            }
+            if (hitInfo.collider.gameObject.CompareTag("Enemy"))
+            {
+                OnEnemyClciked?.Invoke(hitInfo.collider.gameObject);
             }
         }
     }
