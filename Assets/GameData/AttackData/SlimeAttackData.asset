@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81caea406b7434580a84ca810c6a0e49, type: 3}
   m_Name: SlimeAttackData
   m_EditorClassIdentifier: 
-  attackRange: 1
+  attackRange: 1.5
   skillRange: 2
   attackCD: 1.2
   minDamage: 3
   maxDamage: 5
   critMultiplier: 2
-  critChance: 0.1
+  critChance: 0.2
