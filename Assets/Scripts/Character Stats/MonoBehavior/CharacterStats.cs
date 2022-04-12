@@ -7,6 +7,9 @@ public class CharacterStats : MonoBehaviour
     public CharacterData_SO characterStats;
     public AttackData_SO attackData;
 
+    [HideInInspector]
+    public bool isCrit = false;
+
     #region from Stats_SO
     public int MaxHealth {
         get
@@ -216,6 +219,24 @@ public class CharacterStats : MonoBehaviour
         {
             attackData.critChance = value;
         }
+    }
+    #endregion
+
+    #region combat related
+    public void takeDamage(CharacterStats attacker, CharacterStats defender)
+    {
+        //  default damge is 1
+        int damage = Mathf.Max((attacker.damageCalc() - defender.CurrentDefence), 1);
+        CurrentHealth = Mathf.Max((CurrentHealth - damage), 0);
+
+        //  TODO: UI update
+        //  TODO: leveling
+    }
+
+    public int damageCalc()
+    {
+        float damage = Random.Range(attackData.minDamage, attackData.maxDamage);
+        return isCrit ? (int)(damage * attackData.critMultiplier) : (int)damage;
     }
     #endregion
 
