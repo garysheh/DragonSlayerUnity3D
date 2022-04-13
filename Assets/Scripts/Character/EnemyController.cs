@@ -22,8 +22,11 @@ public class EnemyController : MonoBehaviour
     public float patrolRadius;
     public float patrolGapTime;
     private Vector3 wayPoint;
-    private Vector3 refreshPoint;
     private float remainGapTime;
+
+    //  guard info
+    private Vector3 refreshPoint;
+    private Quaternion refreshRotation;
 
     //  attack timer
     private float attackCD;
@@ -41,6 +44,7 @@ public class EnemyController : MonoBehaviour
 
         speed = agent.speed;
         refreshPoint = transform.position;
+        refreshRotation = transform.rotation;
         remainGapTime = patrolGapTime;
 
         if (isGuard)
@@ -82,6 +86,7 @@ public class EnemyController : MonoBehaviour
         switch (enemyState)
         {
             case EnemyState.GUARD:
+                Guard();
                 break;
             case EnemyState.PATROL:
                 Patrol();
@@ -95,7 +100,8 @@ public class EnemyController : MonoBehaviour
                 break;
         }
     }
-    #region Guard or Patrol
+
+    #region Guard and Patrol 
     bool FoundPlayer()
     {
         var colliders = Physics.OverlapSphere(transform.position, sightRadius);
@@ -109,6 +115,75 @@ public class EnemyController : MonoBehaviour
             }
         }
         return foundPlayer;
+    }
+
+    void Guard()
+    {
+        isChase = false;
+        if (IsWayPointReached())
+        {
+            agent.destination = transform.position;
+            transform.rotation = Quaternion.Slerp(transform.rotation, refreshRotation, 0.05f);
+            isWalk = false;
+        }
+        else
+        {
+            isWalk = true;
+            agent.isStopped = false;
+            agent.destination = refreshPoint;
+        }
+    }
+    void Patrol()
+    {
+        isChase = false;
+        //  enemy don't patrol at full speed
+        agent.speed = speed * 0.5f;
+
+        Debug.DrawLine(transform.position, wayPoint);
+        //  check if waypoint reached
+        if (IsWayPointReached())
+        {
+            isWalk = false;
+            //  stay at current position until gap time pass
+            if (remainGapTime > 0)
+            {
+                remainGapTime -= Time.deltaTime;
+            }
+            else
+            {
+                remainGapTime = patrolGapTime;
+                GetNewWayPoint();
+            }
+        }
+        else
+        {
+            MoveToWayPoint();
+        }
+    }
+
+    void MoveToWayPoint()
+    {
+        isWalk = true;
+        agent.destination = wayPoint;
+    }
+
+    void GetNewWayPoint()
+    {
+        float randomX = Random.Range(-patrolRadius, patrolRadius);
+        float randomZ = Random.Range(-patrolRadius, patrolRadius);
+
+        Vector3 randomPoint = new Vector3(refreshPoint.x + randomX,
+                                        transform.position.y,
+                                        refreshPoint.z + randomZ);
+        NavMeshHit hit;
+        wayPoint = (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, 1)) ?
+            hit.position :
+            transform.position;
+    }
+
+    bool IsWayPointReached()
+    {
+        return Vector3.SqrMagnitude(refreshPoint - transform.position) <= agent.stoppingDistance;
     }
     #endregion
 
@@ -148,7 +223,10 @@ public class EnemyController : MonoBehaviour
     void BackToLastState()
     {
         isFollow = false;
+        isChase = false;
         attackTarget = null;
+
+        //  stay at current position until patrol gap time pass
         if (remainGapTime > 0)
         {
             agent.destination = transform.position;
@@ -157,7 +235,6 @@ public class EnemyController : MonoBehaviour
         else if (isGuard)
         {
             enemyState = EnemyState.GUARD;
-            agent.destination = refreshPoint;
         }
         else
         {
@@ -172,6 +249,7 @@ public class EnemyController : MonoBehaviour
             Vector3.Distance(attackTarget.transform.position, transform.position) <= enemyStats.attackData.attackRange:
             false;
     }
+
 
     void AttackPlayer()
     {
@@ -206,50 +284,6 @@ public class EnemyController : MonoBehaviour
     }
     #endregion
 
-    #region Patrol
-    void Patrol()
-    {
-        isChase = false;
-        //  enemy don't patrol at full speed
-        agent.speed = speed * 0.5f;
-
-        Debug.DrawLine(transform.position, wayPoint);
-        //  check if waypoint reached
-        if (Vector3.Distance(wayPoint, transform.position) <= agent.stoppingDistance)
-        {
-            isWalk = false;
-            if (remainGapTime > 0)
-            {
-                remainGapTime -= Time.deltaTime;
-            }
-            else
-            {
-                remainGapTime = patrolGapTime;
-                GetNewWayPoint();
-            }
-            }
-        else
-        {
-            isWalk = true;
-            agent.destination = wayPoint;
-        }
-    }
-
-
-    void GetNewWayPoint()
-    {
-        float randomX = Random.Range(-patrolRadius, patrolRadius);
-        float randomZ = Random.Range(-patrolRadius, patrolRadius);
-
-        Vector3 randomPoint = new Vector3(refreshPoint.x + randomX,
-                                        transform.position.y,
-                                        refreshPoint.z + randomZ);
-        NavMeshHit hit;
-        wayPoint = (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, 1)) ?
-            hit.position :
-            transform.position;
-    }
-    #endregion
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
