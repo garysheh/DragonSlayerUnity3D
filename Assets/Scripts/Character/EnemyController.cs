@@ -95,7 +95,7 @@ public class EnemyController : MonoBehaviour
                 break;
         }
     }
-
+    #region Guard or Patrol
     bool FoundPlayer()
     {
         var colliders = Physics.OverlapSphere(transform.position, sightRadius);
@@ -110,6 +110,8 @@ public class EnemyController : MonoBehaviour
         }
         return foundPlayer;
     }
+    #endregion
+
     #region Chase
     void Chase()
     {
@@ -124,11 +126,7 @@ public class EnemyController : MonoBehaviour
         {
             FollowPlayer();
             //TODO add skill attack for enemey
-            if (TargetInSkillRange())
-            {
-
-            }
-            else if (TargetInAttackRange())
+            if (TargetInAttackRange())
             {
                 //  if target in attack range, stop move and lanch attack
                 isFollow = false;
