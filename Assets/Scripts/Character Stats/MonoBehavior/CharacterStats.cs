@@ -48,6 +48,44 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public int MaxMana
+    {
+        get
+        {
+            if (characterStats != null)
+            {
+                return characterStats.maxMana;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            characterStats.maxMana = value;
+        }
+    }
+
+    public int CurrentMana
+    {
+        get
+        {
+            if (characterStats != null)
+            {
+                return characterStats.currentMana;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            characterStats.currentMana = value;
+        }
+    }
+
     public int baseDefence
     {
         get
