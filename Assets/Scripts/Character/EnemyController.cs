@@ -131,7 +131,7 @@ public class EnemyController : MonoBehaviour
                 //  if target in attack range, stop move and lanch attack
                 isFollow = false;
                 agent.isStopped = true;
-                Attack();
+                AttackPlayer();
             } 
         }
     }
@@ -173,14 +173,7 @@ public class EnemyController : MonoBehaviour
             false;
     }
 
-    bool TargetInSkillRange()
-    {
-        return (attackTarget != null) ?
-            Vector3.Distance(attackTarget.transform.position, transform.position) <= enemyStats.attackData.skillRange :
-            false;
-    }
-
-    void Attack()
+    void AttackPlayer()
     {
         transform.LookAt(attackTarget.transform);
         if (attackCD < 0)
@@ -195,6 +188,17 @@ public class EnemyController : MonoBehaviour
 
         }
     }
+
+    //  animation event
+    void Attack()
+    {
+        if (attackTarget != null)
+        {
+            CharacterStats targetStats = attackTarget.GetComponent<CharacterStats>();
+            targetStats.takeDamage(enemyStats, targetStats);
+        }
+    }
+
 
     void CriticalCheck()
     {
@@ -241,7 +245,9 @@ public class EnemyController : MonoBehaviour
                                         transform.position.y,
                                         refreshPoint.z + randomZ);
         NavMeshHit hit;
-        wayPoint = (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, 1)) ? hit.position : transform.position;
+        wayPoint = (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, 1)) ?
+            hit.position :
+            transform.position;
     }
     #endregion
     void OnDrawGizmosSelected()
