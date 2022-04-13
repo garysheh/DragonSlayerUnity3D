@@ -6,7 +6,6 @@ using UnityEngine;
 public class AttackData_SO : ScriptableObject
 {
     public float attackRange;
-    public float skillRange;
     public float attackCD;
 
     //  normal attack

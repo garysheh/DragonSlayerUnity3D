@@ -10,4 +10,5 @@ public class SkillData_SO : ScriptableObject
     public int[] manaCost = new int[4];
     public int[] skillDamage = new int[4];
     public int[] skillCD = new int[4];
+    public float[] skillRange = new float[4];
 }
