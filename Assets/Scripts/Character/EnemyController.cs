@@ -35,13 +35,16 @@ public class EnemyController : MonoBehaviour
     bool isChase;
     bool isFollow;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         enemyStats = GetComponent<CharacterStats>();
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         speed = agent.speed;
         refreshPoint = transform.position;
         refreshRotation = transform.rotation;
@@ -120,7 +123,7 @@ public class EnemyController : MonoBehaviour
     void Guard()
     {
         isChase = false;
-        if (IsWayPointReached())
+        if (IsPointReached(refreshPoint))
         {
             agent.destination = transform.position;
             transform.rotation = Quaternion.Slerp(transform.rotation, refreshRotation, 0.05f);
@@ -141,7 +144,7 @@ public class EnemyController : MonoBehaviour
 
         Debug.DrawLine(transform.position, wayPoint);
         //  check if waypoint reached
-        if (IsWayPointReached())
+        if (IsPointReached(wayPoint))
         {
             isWalk = false;
             //  stay at current position until gap time pass
@@ -181,9 +184,9 @@ public class EnemyController : MonoBehaviour
             transform.position;
     }
 
-    bool IsWayPointReached()
+    bool IsPointReached(Vector3 point)
     {
-        return Vector3.SqrMagnitude(refreshPoint - transform.position) <= agent.stoppingDistance;
+        return Vector3.SqrMagnitude(point - transform.position) <= agent.stoppingDistance;
     }
     #endregion
 
