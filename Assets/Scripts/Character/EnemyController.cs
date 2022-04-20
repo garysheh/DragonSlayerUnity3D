@@ -47,6 +47,7 @@ public class EnemyController : MonoBehaviour
     {
         speed = agent.speed;
         refreshPoint = transform.position;
+        Debug.Log(refreshPoint);
         refreshRotation = transform.rotation;
         remainGapTime = patrolGapTime;
 
@@ -290,7 +291,7 @@ public class EnemyController : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(refreshPoint, sightRadius);
+        Gizmos.DrawWireSphere(transform.position, sightRadius);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(refreshPoint, patrolRadius);
     }

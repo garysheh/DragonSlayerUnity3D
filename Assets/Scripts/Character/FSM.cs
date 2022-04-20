@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 public class FSM
 {
     private EnemyStates currentState;
@@ -21,7 +23,8 @@ public class FSM
         {
             SetState(transition.To);
         }
-        currentState.Tick();
+        //Debug.Log(currentState);
+        currentState?.Tick();
     }
 
     public void SetState(EnemyStates state)
@@ -32,7 +35,7 @@ public class FSM
             return;
         }
         //  Exiting current state
-        currentState.OnExit();
+        currentState?.OnExit();
         currentState = state;
 
         transitions.TryGetValue(currentState.GetType(), out currentTransitions);
@@ -78,17 +81,20 @@ public class FSM
     private Transition GetTransition()
     {
         foreach (var transition in anyTransitions)
+        {
             if (transition.Condition())
             {
                 return transition;
             }
-
+        }
         foreach (var transition in currentTransitions)
+        { 
+            //Debug.Log(transition.Condition);
             if (transition.Condition())
             {
                 return transition;
             }
-
+        }
         return null;
     }
 }

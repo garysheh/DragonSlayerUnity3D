@@ -8,11 +8,11 @@ public class EnemyControllerWithFSM : MonoBehaviour
 {
     //  State Machine
     private FSM enemyFSM;
-    private GuardState guardState;
-    private PatrolState patrolState;
-    private ChaseState chaseState;
-    private CombatState combatState;
-    private DeadState deadState;
+    //private GuardState guardState;
+    //private PatrolState patrolState;
+    //private ChaseState chaseState;
+    //private CombatState combatState;
+    //private DeadState deadState;
 
     private NavMeshAgent agent;
     private EnemyState enemyState;
@@ -22,25 +22,19 @@ public class EnemyControllerWithFSM : MonoBehaviour
     [Header("Basic Settings")]
     public float sightRadius;
     public bool isGuard;
-    private GameObject attackTarget;
-    private float speed;
+    public GameObject attackTarget;
 
     [Header("Patrol Settings")]
     public float patrolRadius;
     public float patrolGapTime;
     private Vector3 wayPoint;
-    private float remainGapTime;
 
     //  guard info
-    private Transform refreshTransform;
-    
+    private Vector3 refreshPoint;
+    private Quaternion refreshRotation;
 
     //  attack timer
     private float attackCD;
-    //  Animator parameters
-    bool isWalk;
-    bool isChase;
-    bool isFollow;
 
     private void Awake()
     {
@@ -48,15 +42,15 @@ public class EnemyControllerWithFSM : MonoBehaviour
         anim = GetComponent<Animator>();
         enemyStats = GetComponent<CharacterStats>();
 
-        refreshTransform = transform;
-
+        refreshPoint = transform.position;
         #region State Machine Initialization
         enemyFSM = new FSM();
-        guardState = new GuardState(this, agent, anim, refreshTransform);
-        patrolState = new PatrolState(this, agent, anim);
-        chaseState = new ChaseState(agent, anim, attackTarget);
-        combatState = new CombatState(this);
-        deadState = new DeadState(this);
+        var guardState = new GuardState(this, agent, anim, refreshPoint, refreshRotation);
+        var patrolState = new PatrolState(this, agent, anim);
+        var chaseState = new ChaseState(agent, anim, attackTarget);
+        var combatState = new CombatState(this);
+        var deadState = new DeadState(this);
+        Debug.Log("all states have been initialized");
         //  when(a, b, c); when "a" is valid go from b to c;
         When(HasTarget(), guardState, chaseState);
         When(HasTarget(), patrolState, chaseState);
@@ -82,15 +76,12 @@ public class EnemyControllerWithFSM : MonoBehaviour
         Func<bool> TargetOutOfRange() => () => MaxCombatRange() < DistanceFromTarget();
         Func<bool> LostTargetAndWasGuard() => () => !FoundPlayer() && (isGuard == true);
         Func<bool> LostTargetAndWasPatrol() => () => !FoundPlayer() && (isGuard == false);
-        Func<bool> IsDead() => () => IsHealthZero();
-        
+        Func<bool> IsDead() => () => IsHealthZero() == true;
     } 
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = agent.speed;
-        remainGapTime = patrolGapTime;
     }
 
     // Update is called once per frame
@@ -99,13 +90,13 @@ public class EnemyControllerWithFSM : MonoBehaviour
         enemyFSM.Tick();
     }
 
-    bool IsHealthZero()
+    public bool IsHealthZero()
     { 
         //  when enemy is dead return 0;
         return enemyStats.CurrentHealth == 0;
     }
 
-    float DistanceFromTarget()
+    public float DistanceFromTarget()
     {
         if (attackTarget != null)
         {
@@ -114,14 +105,13 @@ public class EnemyControllerWithFSM : MonoBehaviour
         return Mathf.Infinity;
     }
 
-    float MaxCombatRange()
+    public float MaxCombatRange()
     {
         if (enemyStats.SkillRange != null)
         {
-
-            Mathf.Max(enemyStats.AttackRange, enemyStats.SkillRange.Max()); return enemyStats.AttackRange;
+            return Mathf.Max(enemyStats.AttackRange, enemyStats.SkillRange.Max()); 
         }
-        return Mathf.Max(enemyStats.AttackRange, enemyStats.SkillRange.Max());
+        return enemyStats.AttackRange;
     }
 
     public bool FoundPlayer()
@@ -132,7 +122,6 @@ public class EnemyControllerWithFSM : MonoBehaviour
         {
             if (target.CompareTag("Player"))
             {
-                attackTarget = target.gameObject;
                 foundPlayer = true;
             }
         }
@@ -143,14 +132,15 @@ public class EnemyControllerWithFSM : MonoBehaviour
     {
         float randomX = UnityEngine.Random.Range(-patrolRadius, patrolRadius);
         float randomZ = UnityEngine.Random.Range(-patrolRadius, patrolRadius);
-
-        Vector3 randomPoint = new Vector3(refreshTransform.position.x + randomX,
+        Vector3 randomPoint = new Vector3(refreshPoint.x + randomX,
                                         transform.position.y,
-                                        refreshTransform.position.z + randomZ);
+                                        refreshPoint.z + randomZ);
         NavMeshHit hit;
-        return (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, 1)) ?
+
+        var point =  (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, 1)) ?
             hit.position :
             transform.position;
+        return point;
     }
 
     public bool IsPointReached(Vector3 point)
@@ -158,7 +148,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
         return Vector3.SqrMagnitude(point - transform.position) <= agent.stoppingDistance;
     }
 
-    bool TargetInAttackRange()
+    public bool TargetInAttackRange()
     {
         return (attackTarget != null) ?
             Vector3.Distance(attackTarget.transform.position, transform.position) <= enemyStats.attackData.attackRange :
@@ -192,17 +182,16 @@ public class EnemyControllerWithFSM : MonoBehaviour
         }
     }
 
-
     void CriticalCheck()
     {
         enemyStats.isCrit = UnityEngine.Random.value < enemyStats.attackData.critChance;
     }
 
-    //void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireSphere(refreshTransform.position, sightRadius);
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(refreshTransform.position, patrolRadius);
-    //}
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, sightRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(refreshPoint, patrolRadius);
+    }
 }

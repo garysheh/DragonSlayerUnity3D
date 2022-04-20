@@ -9,11 +9,13 @@ public class GuardState : EnemyStates
     private Vector3 refreshPoint;
     private Quaternion refreshRotation;
 
-    public GuardState(EnemyControllerWithFSM controller, NavMeshAgent agent, Animator animator, Transform transform)
+    public GuardState(EnemyControllerWithFSM controller, NavMeshAgent agent, Animator animator, Vector3 refreshPoint, Quaternion refreshRotation)
     {
-        
-        refreshPoint = transform.position;
-        refreshRotation = transform.rotation;
+        this.controller = controller;
+        this.agent = agent;
+        this.animator = animator;
+        this.refreshPoint = refreshPoint;
+        this.refreshRotation = refreshRotation;
     }
 
     public void Tick()

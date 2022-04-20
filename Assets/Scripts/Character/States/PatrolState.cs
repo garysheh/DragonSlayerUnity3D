@@ -20,6 +20,7 @@ public class PatrolState : EnemyStates
 
     public void Tick()
     {
+        //Debug.Log("in patrol tick");
         Debug.DrawLine(controller.transform.position, wayPoint);
         //  check if waypoint reached
         if (controller.IsPointReached(wayPoint))
@@ -47,6 +48,7 @@ public class PatrolState : EnemyStates
         animator.SetBool("Walk", true);
         agent.destination = wayPoint;
     }
+
     public void OnEnter()
     {
         agent.speed *= 0.5f;
