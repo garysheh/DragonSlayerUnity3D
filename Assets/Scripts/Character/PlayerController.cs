@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         characterStats = GetComponent<CharacterStats>();
     }
 
+
     void Start()
     {
         MouseController.Instance.OnMouseClicked += MoveToTarget;
