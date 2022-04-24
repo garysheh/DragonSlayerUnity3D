@@ -356,5 +356,4 @@ public class CharacterStats : MonoBehaviour
         return isCrit ? (int)(damage * attackData.critMultiplier) : (int)damage;
     }
     #endregion
-
 }

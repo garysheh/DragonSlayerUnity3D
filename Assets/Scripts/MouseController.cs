@@ -49,7 +49,8 @@ public class MouseController : MonoBehaviour
     }
 
     void MouseControl() {
-        if(Input.GetMouseButton(0) && hitInfo.collider != null)
+
+        if(Input.GetMouseButtonDown(1) && hitInfo.collider != null)
         {
             if(hitInfo.collider.gameObject.CompareTag("Ground"))
             {

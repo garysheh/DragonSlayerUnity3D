@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         characterStats = GetComponent<CharacterStats>();
     }
 
+
     void Start()
     {
         MouseController.Instance.OnMouseClicked += MoveToTarget;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
         if (target != null)
         {
             attackEnemy = target;
+            characterStats.isCrit = UnityEngine.Random.value < characterStats.attackData.critChance;
             StartCoroutine(MoveToEnemy());
         }
     }
@@ -74,9 +76,16 @@ public class PlayerController : MonoBehaviour
         // attack part
         if (cd < 0)
         {
+            animator.SetBool("Critical", characterStats.isCrit);
             animator.SetTrigger("Attack");
             // refresh cooldown
-            cd = 0.5f;
+            cd = characterStats.attackData.attackCD;
         }
+    }
+
+    void attack()
+    {
+        var EnemyStats = attackEnemy.GetComponent<CharacterStats>();
+        EnemyStats.takeDamage(characterStats, EnemyStats);
     }
 }
