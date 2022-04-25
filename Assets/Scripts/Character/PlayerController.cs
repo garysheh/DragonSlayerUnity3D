@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         MouseController.Instance.OnMouseClicked += MoveToTarget;
-        MouseController.Instance.OnEnemyClciked += AttackEnemy;
+        MouseController.Instance.OnEnemyClicked += AttackEnemy;
     }
 
     private void SwitchAnimation()
