@@ -76,7 +76,6 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("Walk", isWalk);
         anim.SetBool("Chase", isChase);
         anim.SetBool("Follow", isFollow);
-        //Debug.Log(enemyStats.isCrit);
         anim.SetBool("Critical", enemyStats.isCrit);
     }
 

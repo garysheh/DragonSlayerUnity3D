@@ -16,9 +16,44 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // keyboard movement code
+        /*
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if(input.magnitude <= 0)
+        {
+            animator.SetBool("Walk", false);
+            return;
+        }
+
+        if(Mathf.Abs(input.y) > 0.0f)
+        {
+            Move(input);
+        }
+        else
+        {
+            Rotate(input);
+        }
+        */
+
         AnimationControl();
         cd -= Time.deltaTime;
     }
+    /*
+    void Rotate(Vector2 input)
+    {
+        agent.destination = transform.position;
+        animator.SetBool("Walk", false);
+        transform.Rotate(0, input.x * agent.angularSpeed * Time.deltaTime, 0);
+    }
+
+    void Move(Vector2 input)
+    {
+        animator.SetBool("Walk", true);
+        Vector3 destination = transform.position + transform.right * input.x + transform.forward * input.y;
+        agent.destination = destination;
+    }
+    */
 
     void AnimationControl()
     {
