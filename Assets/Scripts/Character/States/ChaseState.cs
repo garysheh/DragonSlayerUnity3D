@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class ChaseState : EnemyStates
 {
-    private readonly EnemyControllerWithFSM controller;
     private readonly NavMeshAgent agent;
     private readonly Animator animator;
     private readonly GameObject attackTarget;
@@ -16,13 +15,13 @@ public class ChaseState : EnemyStates
 
     public void Tick()
     {
-        animator.SetBool("Follow", true);
-        agent.isStopped = false;
         agent.SetDestination(attackTarget.transform.position);
     }
     
     public void OnEnter()
     {
+        agent.isStopped = false;
+        animator.SetBool("Follow", true);
         animator.SetBool("Chase", true);
     }
     public void OnExit()
