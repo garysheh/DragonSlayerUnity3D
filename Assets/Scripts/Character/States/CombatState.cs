@@ -8,6 +8,7 @@ public class CombatState : EnemyStates
     private readonly Animator animator;
     private CharacterStats enemyStats;
     private readonly GameObject attackTarget;
+    private CharacterStats targetStats;
 
     public CombatState(EnemyControllerWithFSM controller, NavMeshAgent agent, Animator animator, CharacterStats enemyStats, GameObject target)
     {
@@ -16,6 +17,7 @@ public class CombatState : EnemyStates
         this.animator = animator;
         this.enemyStats = enemyStats;
         this.attackTarget = target;
+        this.targetStats = attackTarget.GetComponent<CharacterStats>();
     }
 
     public void Tick()
@@ -28,6 +30,7 @@ public class CombatState : EnemyStates
             CriticalCheck();
             animator.SetBool("Critical", enemyStats.isCrit);
             animator.SetTrigger("Attack");
+            targetStats.takeDamage(enemyStats, targetStats);
         }
     }
 
