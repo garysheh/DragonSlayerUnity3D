@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: SlimeAttackData
   m_EditorClassIdentifier: 
   attackRange: 1.5
-  skillRange: 2
   attackCD: 1.2
   minDamage: 3
   maxDamage: 5
   critMultiplier: 2
-  critChance: 0.2
+  critChance: 1

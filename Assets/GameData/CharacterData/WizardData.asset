@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WizardData
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 100
+  currentHealth: 10
   maxMana: 0
   currentMana: 0
   baseDefence: 5

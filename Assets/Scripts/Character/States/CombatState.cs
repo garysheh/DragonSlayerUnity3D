@@ -31,6 +31,7 @@ public class CombatState : EnemyStates
             animator.SetBool("Critical", enemyStats.isCrit);
             animator.SetTrigger("Attack");
             targetStats.takeDamage(enemyStats, targetStats);
+            Debug.Log("HP: " + targetStats.CurrentHealth);
         }
     }
 
