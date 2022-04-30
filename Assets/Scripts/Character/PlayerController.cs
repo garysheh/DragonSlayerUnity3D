@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private CharacterStats characterStats; // character status
     private GameObject attackEnemy; // object to attack
     private float cd; // normal attack cooldown
+    private bool deadmode; // when player is dead
 
 
     void Update()
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
         AnimationControl();
         cd -= Time.deltaTime;
+        deadmode = characterStats.CurrentHealth == 0;
     }
     /*
     void Rotate(Vector2 input)
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchAnimation()
     {
         animator.SetFloat("Speed", agent.velocity.sqrMagnitude);
+        animator.SetBool("Death", deadmode);
     }
 
     // function that gets the coordinate of character then transport to the agent
