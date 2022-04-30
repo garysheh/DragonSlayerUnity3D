@@ -5,19 +5,27 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     public CharacterData_SO characterStats;
+    private CharacterData_SO characterStats_instance;
     public AttackData_SO attackData;
     public SkillData_SO skillData;
 
     [HideInInspector]
     public bool isCrit = false;
 
+    private void Awake()
+    {
+        if (characterStats != null)
+        {
+            characterStats_instance = Instantiate(characterStats);
+        }
+    }
     #region from Stats_SO
     public int MaxHealth {
         get
         {
-            if (characterStats != null)
+            if (characterStats_instance != null)
             {
-                return characterStats.maxHealth;
+                return characterStats_instance.maxHealth;
             }
             else
             {
@@ -26,7 +34,7 @@ public class CharacterStats : MonoBehaviour
         }
         set
         {
-            characterStats.maxHealth = value;
+            characterStats_instance.maxHealth = value;
         }
     }
 
@@ -34,9 +42,9 @@ public class CharacterStats : MonoBehaviour
     {
         get
         {
-            if (characterStats != null)
+            if (characterStats_instance != null)
             {
-                return characterStats.currentHealth;
+                return characterStats_instance.currentHealth;
             }
             else
             {
@@ -45,7 +53,7 @@ public class CharacterStats : MonoBehaviour
         }
         set
         {
-            characterStats.currentHealth = value;
+            characterStats_instance.currentHealth = value;
         }
     }
 
@@ -53,9 +61,9 @@ public class CharacterStats : MonoBehaviour
     {
         get
         {
-            if (characterStats != null)
+            if (characterStats_instance != null)
             {
-                return characterStats.maxMana;
+                return characterStats_instance.maxMana;
             }
             else
             {
@@ -64,7 +72,7 @@ public class CharacterStats : MonoBehaviour
         }
         set
         {
-            characterStats.maxMana = value;
+            characterStats_instance.maxMana = value;
         }
     }
 
@@ -72,9 +80,9 @@ public class CharacterStats : MonoBehaviour
     {
         get
         {
-            if (characterStats != null)
+            if (characterStats_instance != null)
             {
-                return characterStats.currentMana;
+                return characterStats_instance.currentMana;
             }
             else
             {
@@ -83,7 +91,7 @@ public class CharacterStats : MonoBehaviour
         }
         set
         {
-            characterStats.currentMana = value;
+            characterStats_instance.currentMana = value;
         }
     }
 
@@ -91,9 +99,9 @@ public class CharacterStats : MonoBehaviour
     {
         get
         {
-            if (characterStats != null)
+            if (characterStats_instance != null)
             {
-                return characterStats.baseDefence;
+                return characterStats_instance.baseDefence;
             }
             else
             {
@@ -102,7 +110,7 @@ public class CharacterStats : MonoBehaviour
         }
         set
         {
-            characterStats.maxHealth = value;
+            characterStats_instance.maxHealth = value;
         }
     }
 
@@ -110,9 +118,9 @@ public class CharacterStats : MonoBehaviour
     {
         get
         {
-            if (characterStats != null)
+            if (characterStats_instance != null)
             {
-                return characterStats.currentDefence;
+                return characterStats_instance.currentDefence;
             }
             else
             {
@@ -121,7 +129,7 @@ public class CharacterStats : MonoBehaviour
         }
         set
         {
-            characterStats.currentDefence = value;
+            characterStats_instance.currentDefence = value;
         }
     }
     #endregion
