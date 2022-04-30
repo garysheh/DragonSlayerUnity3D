@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class MouseController : MonoBehaviour
-{
-    public static MouseController Instance;
-
+public class MouseController : Singleton<MouseController>
+{ 
     public Texture2D finger, attack, transport, talk;
     RaycastHit hitInfo;
     // Singleton Pattern
@@ -16,12 +14,10 @@ public class MouseController : MonoBehaviour
     public event Action<GameObject> OnEnemyClicked;
 
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-            Destroy(gameObject);
-
-        Instance = this;
+        base.Awake();
+        DontDestroyOnLoad(this);
     }
 
     void Update() {
