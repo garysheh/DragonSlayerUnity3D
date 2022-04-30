@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterStats))]
 public class EnemyControllerWithFSM : MonoBehaviour
 {
     //  State Machine
@@ -42,6 +43,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
         anim = GetComponent<Animator>();
         enemyStats = GetComponent<CharacterStats>();
         coll = GetComponent<Collider>();
+        attackTarget = GameObject.FindGameObjectWithTag("Player");
 
         refreshPoint = transform.position;
         #region State Machine Initialization
