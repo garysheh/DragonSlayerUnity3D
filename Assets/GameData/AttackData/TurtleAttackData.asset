@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81caea406b7434580a84ca810c6a0e49, type: 3}
-  m_Name: TurtleData
+  m_Name: TurtleAttackData
   m_EditorClassIdentifier: 
-  attackRange: 0
-  attackCD: 0
-  minDamage: 0
-  maxDamage: 0
-  critMultiplier: 0
-  critChance: 0
+  attackRange: 1.5
+  attackCD: 1.5
+  minDamage: 2
+  maxDamage: 4
+  critMultiplier: 2
+  critChance: 0.2

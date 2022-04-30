@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     {
         agent.isStopped = false; // to make sure the character keeps chasing to the enemy
         transform.LookAt(attackEnemy.transform);
-        while(Vector3.Distance(attackEnemy.transform.position, transform.position) > 1)
+        while(Vector3.Distance(attackEnemy.transform.position, transform.position) > characterStats.AttackRange)
         {
             agent.destination = attackEnemy.transform.position;
             yield return null;
