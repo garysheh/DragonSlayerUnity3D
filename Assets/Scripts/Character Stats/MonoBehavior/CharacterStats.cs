@@ -346,6 +346,10 @@ public class CharacterStats : MonoBehaviour
         int damage = Mathf.Max((attacker.damageCalc() - defender.CurrentDefence), 1);
         CurrentHealth = Mathf.Max((CurrentHealth - damage), 0);
 
+        if (isCrit)
+        {
+            defender.GetComponent<Animator>().SetTrigger("GetHit");
+        }
         //  TODO: UI update
         //  TODO: leveling
     }

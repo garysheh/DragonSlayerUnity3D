@@ -23,7 +23,7 @@ public class FSM
         {
             SetState(transition.To);
         }
-        //Debug.Log(currentState);
+        Debug.Log(currentState);
         currentState?.Tick();
     }
 

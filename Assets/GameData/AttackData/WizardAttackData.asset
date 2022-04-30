@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81caea406b7434580a84ca810c6a0e49, type: 3}
   m_Name: WizardAttackData
   m_EditorClassIdentifier: 
-  attackRange: 5
-  skillRange: 7
+  attackRange: 8
   attackCD: 1
   minDamage: 5
   maxDamage: 10

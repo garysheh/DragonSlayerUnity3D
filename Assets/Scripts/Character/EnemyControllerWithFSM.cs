@@ -15,9 +15,9 @@ public class EnemyControllerWithFSM : MonoBehaviour
     //private DeadState deadState;
 
     private NavMeshAgent agent;
-    private EnemyState enemyState;
     private Animator anim;
     private CharacterStats enemyStats;
+    private Collider coll;
 
     [Header("Basic Settings")]
     public float sightRadius;
@@ -27,20 +27,21 @@ public class EnemyControllerWithFSM : MonoBehaviour
     [Header("Patrol Settings")]
     public float patrolRadius;
     public float patrolGapTime;
-    private Vector3 wayPoint;
 
     //  guard info
     private Vector3 refreshPoint;
     private Quaternion refreshRotation;
 
     //  attack timer
-    private float attackCD;
+    [HideInInspector]
+    public float attackCD;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         enemyStats = GetComponent<CharacterStats>();
+        coll = GetComponent<Collider>();
 
         refreshPoint = transform.position;
         #region State Machine Initialization
@@ -48,8 +49,8 @@ public class EnemyControllerWithFSM : MonoBehaviour
         var guardState = new GuardState(this, agent, anim, refreshPoint, refreshRotation);
         var patrolState = new PatrolState(this, agent, anim);
         var chaseState = new ChaseState(agent, anim, attackTarget);
-        var combatState = new CombatState(this);
-        var deadState = new DeadState(this);
+        var combatState = new CombatState(this, agent, anim, enemyStats, attackTarget);
+        var deadState = new DeadState(this, agent, anim, coll);
         Debug.Log("all states have been initialized");
         //  when(a, b, c); when "a" is valid go from b to c;
         When(HasTarget(), guardState, chaseState);
@@ -87,6 +88,8 @@ public class EnemyControllerWithFSM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //  attack timer
+        attackCD -= Time.deltaTime;
         enemyFSM.Tick();
     }
 
@@ -153,38 +156,6 @@ public class EnemyControllerWithFSM : MonoBehaviour
         return (attackTarget != null) ?
             Vector3.Distance(attackTarget.transform.position, transform.position) <= enemyStats.attackData.attackRange :
             false;
-    }
-
-
-    void AttackPlayer()
-    {
-        transform.LookAt(attackTarget.transform);
-        if (attackCD < 0)
-        {
-            //  refresh attack cd
-            attackCD = enemyStats.attackData.attackCD;
-            if (TargetInAttackRange())
-            {
-                CriticalCheck();
-                anim.SetTrigger("Attack");
-            }
-
-        }
-    }
-
-    //  animation event
-    void Attack()
-    {
-        if (attackTarget != null)
-        {
-            CharacterStats targetStats = attackTarget.GetComponent<CharacterStats>();
-            targetStats.takeDamage(enemyStats, targetStats);
-        }
-    }
-
-    void CriticalCheck()
-    {
-        enemyStats.isCrit = UnityEngine.Random.value < enemyStats.attackData.critChance;
     }
 
     void OnDrawGizmosSelected()
