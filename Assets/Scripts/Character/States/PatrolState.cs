@@ -14,7 +14,7 @@ public class PatrolState : EnemyStates
         this.controller = controller;
         this.agent = agent;
         this.animator = animator;
-        wayPoint = controller.GetNewWayPoint();
+        wayPoint = GetNewWayPoint();
         remainGapTime = controller.patrolGapTime;
     }
 
@@ -23,7 +23,7 @@ public class PatrolState : EnemyStates
         //Debug.Log("in patrol tick");
         Debug.DrawLine(controller.transform.position, wayPoint);
         //  check if waypoint reached
-        if (controller.IsPointReached(wayPoint))
+        if (IsPointReached(wayPoint))
         {
             animator.SetBool("Walk", false);
             //  stay at current position until gap time pass
@@ -34,13 +34,35 @@ public class PatrolState : EnemyStates
             else
             {
                 remainGapTime = controller.patrolGapTime;
-                wayPoint = controller.GetNewWayPoint();
+                wayPoint = GetNewWayPoint();
             }
         }
         else
         {
+            animator.SetBool("Walk", true);
             MoveToWayPoint();
+
         }
+    }
+
+    private bool IsPointReached(Vector3 point)
+    {
+        return Vector3.SqrMagnitude(point - controller.transform.position) <= agent.stoppingDistance;
+    }
+
+    private Vector3 GetNewWayPoint()
+    {
+        float randomX = UnityEngine.Random.Range(-controller.patrolRadius, controller.patrolRadius);
+        float randomZ = UnityEngine.Random.Range(-controller.patrolRadius, controller.patrolRadius);
+        Vector3 randomPoint = new Vector3(controller.refreshPoint.x + randomX,
+                                        controller.transform.position.y,
+                                        controller.refreshPoint.z + randomZ);
+        NavMeshHit hit;
+
+        var point = (NavMesh.SamplePosition(randomPoint, out hit, controller.patrolRadius, 1)) ?
+            hit.position :
+            controller.transform.position;
+        return point;
     }
 
     void MoveToWayPoint()
@@ -56,5 +78,6 @@ public class PatrolState : EnemyStates
     public void OnExit()
     {
         agent.speed *= 2.0f;
+        animator.SetBool("Walk", true);
     }
 }

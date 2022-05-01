@@ -9,7 +9,6 @@ public class CharacterStats : MonoBehaviour
     public CharacterData_SO characterStats;
     private CharacterData_SO characterStats_instance;
     public AttackData_SO attackData;
-    public SkillData_SO skillData;
 
     [HideInInspector]
     public bool isCrit = false;
@@ -305,6 +304,13 @@ public class CharacterStats : MonoBehaviour
         //  TODO: UI update
         healthBarwithAttack?.Invoke(CurrentHealth, MaxHealth);
         //  TODO: leveling
+    }
+
+    //  for skill attack, damage is given on skill script
+    public void takeDamage(CharacterStats attacker, CharacterStats defender, int damage)
+    {
+        CurrentHealth = Mathf.Max((CurrentHealth - damage), 0);
+        healthBarwithAttack?.Invoke(CurrentHealth, MaxHealth);
     }
 
     public int damageCalc()

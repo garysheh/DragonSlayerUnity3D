@@ -23,6 +23,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
     [Header("Basic Settings")]
     public float sightRadius;
     public bool isGuard;
+    [HideInInspector]
     public GameObject attackTarget;
 
     [Header("Patrol Settings")]
@@ -30,12 +31,14 @@ public class EnemyControllerWithFSM : MonoBehaviour
     public float patrolGapTime;
 
     //  guard info
-    private Vector3 refreshPoint;
+    [HideInInspector]
+    public Vector3 refreshPoint;
     private Quaternion refreshRotation;
 
     //  attack timer
     [HideInInspector]
     public float attackCD;
+    [HideInInspector]
     public float skillCD;
 
     private void Awake()
@@ -45,6 +48,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
         enemyStats = GetComponent<CharacterStats>();
         coll = GetComponent<Collider>();
         attackTarget = GameObject.FindGameObjectWithTag("Player");
+        //Debug.Log(attackTarget.name);
 
         refreshPoint = transform.position;
         skillCD = enemyStats.SkillCD;
@@ -90,8 +94,6 @@ public class EnemyControllerWithFSM : MonoBehaviour
     {
         //  attack timer
         attackCD -= Time.deltaTime;
-        skillCD -= Time.deltaTime;
-
         enemyFSM.Tick();
     }
 
@@ -103,17 +105,11 @@ public class EnemyControllerWithFSM : MonoBehaviour
 
     public float DistanceFromTarget()
     {
-        if (attackTarget != null)
-        {
-            Debug.Log("Dis: "+Vector3.Distance(attackTarget.transform.position, transform.position));
-            return Vector3.Distance(attackTarget.transform.position, transform.position);
-        }
-        return Mathf.Infinity;
+        return Vector3.Distance(attackTarget.transform.position, transform.position);
     }
 
     public float MaxCombatRange()
     {
-        Debug.Log(enemyStats.AttackRange);
         return Mathf.Max(enemyStats.AttackRange, enemyStats.SkillRange);    
     }
 
@@ -131,31 +127,20 @@ public class EnemyControllerWithFSM : MonoBehaviour
         return foundPlayer;
     }
 
-    public Vector3 GetNewWayPoint()
+    //  animation event
+    void Attack()
     {
-        float randomX = UnityEngine.Random.Range(-patrolRadius, patrolRadius);
-        float randomZ = UnityEngine.Random.Range(-patrolRadius, patrolRadius);
-        Vector3 randomPoint = new Vector3(refreshPoint.x + randomX,
-                                        transform.position.y,
-                                        refreshPoint.z + randomZ);
-        NavMeshHit hit;
-
-        var point =  (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, 1)) ?
-            hit.position :
-            transform.position;
-        return point;
+        if (transform.IsTargetInfront(attackTarget.transform))
+        {
+            CharacterStats targetStats = attackTarget.GetComponent<CharacterStats>();
+            CriticalCheck();
+            targetStats.takeDamage(enemyStats, targetStats);
+        }
     }
 
-    public bool IsPointReached(Vector3 point)
+    public void CriticalCheck()
     {
-        return Vector3.SqrMagnitude(point - transform.position) <= agent.stoppingDistance;
-    }
-
-    public bool TargetInAttackRange()
-    {
-        return (attackTarget != null) ?
-            Vector3.Distance(attackTarget.transform.position, transform.position) <= enemyStats.attackData.attackRange :
-            false;
+        enemyStats.isCrit = UnityEngine.Random.value < enemyStats.attackData.critChance;
     }
 
     void OnDrawGizmosSelected()
