@@ -12,18 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4f810e84de64ba59d8c6a546fd631d, type: 3}
   m_Name: GruntData
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  maxHealth: 55
-  currentHealth: 55
-  maxMana: 0
-  currentMana: 0
-  baseDefence: 4
-  currentDefence: 4
-=======
   maxHealth: 30
   currentHealth: 30
   maxMana: 0
   currentMana: 0
   baseDefence: 5
   currentDefence: 5
->>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
