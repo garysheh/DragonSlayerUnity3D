@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public event Action<int, int> healthBarwithAttack;
     public CharacterData_SO characterStats;
     private CharacterData_SO characterStats_instance;
     public AttackData_SO attackData;
@@ -301,12 +303,13 @@ public class CharacterStats : MonoBehaviour
             defender.GetComponent<Animator>().SetTrigger("GetHit");
         }
         //  TODO: UI update
+        healthBarwithAttack?.Invoke(CurrentHealth, MaxHealth);
         //  TODO: leveling
     }
 
     public int damageCalc()
     {
-        float damage = Random.Range(attackData.minDamage, attackData.maxDamage);
+        float damage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);
         return isCrit ? (int)(damage * attackData.critMultiplier) : (int)damage;
     }
     #endregion

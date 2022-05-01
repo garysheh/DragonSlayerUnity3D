@@ -70903,9 +70903,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.06666667
+<<<<<<< HEAD
         value: 40.73527
         inSlope: 5.721473
         outSlope: 5.7214727
+=======
+        value: 40.735275
+        inSlope: 5.72113
+        outSlope: 5.7211294
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -70949,8 +70955,13 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.23333335
         value: 41.958313
+<<<<<<< HEAD
         inSlope: 5.462952
         outSlope: 5.462952
+=======
+        inSlope: 5.4643254
+        outSlope: 5.4643254
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -71057,8 +71068,13 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.6333334
         value: 35.86897
+<<<<<<< HEAD
         inSlope: 8.919861
         outSlope: 8.919877
+=======
+        inSlope: 8.918488
+        outSlope: 8.918504
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -71074,9 +71090,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.70000005
+<<<<<<< HEAD
         value: 36.62492
         inSlope: 12.484921
         outSlope: 12.48357
+=======
+        value: 36.624916
+        inSlope: 12.485265
+        outSlope: 12.48254
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -71128,9 +71150,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.90000004
+<<<<<<< HEAD
         value: 37.706623
         inSlope: -3.695873
         outSlope: -3.694493
+=======
+        value: 37.70662
+        inSlope: -3.6941564
+        outSlope: -3.6941497
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -71164,9 +71192,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.0333334
+<<<<<<< HEAD
         value: 37.660442
         inSlope: 4.3646507
         outSlope: 4.3646665
+=======
+        value: 37.66044
+        inSlope: 4.3636208
+        outSlope: 4.3636365
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -72325,9 +72359,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
+<<<<<<< HEAD
         value: -36.161858
         inSlope: 17.080324
         outSlope: 17.080294
+=======
+        value: -36.161854
+        inSlope: 17.081354
+        outSlope: 17.081324
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -72344,7 +72384,11 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5666667
         value: -35.83644
+<<<<<<< HEAD
         inSlope: 0.034332246
+=======
+        inSlope: 0.035705537
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         outSlope: 0.03433231
         tangentMode: 0
         weightedMode: 0
@@ -72370,9 +72414,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
+<<<<<<< HEAD
         value: -35.832283
         inSlope: 0.022659324
         outSlope: 0.022659283
+=======
+        value: -35.83228
+        inSlope: 0.023689292
+        outSlope: 0.02368925
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -72424,9 +72474,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.86666673
+<<<<<<< HEAD
         value: -35.837067
         inSlope: -0.9640495
         outSlope: -0.9640512
+=======
+        value: -35.837063
+        inSlope: -0.9643928
+        outSlope: -0.9643945
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -72469,9 +72525,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.0333334
+<<<<<<< HEAD
         value: -37.163742
         inSlope: -13.690302
         outSlope: -13.6903515
+=======
+        value: -37.16374
+        inSlope: -13.690645
+        outSlope: -13.690695
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -73383,7 +73445,11 @@ AnimationClip:
         time: 0.20000002
         value: 56.761776
         inSlope: -315.20966
+<<<<<<< HEAD
         outSlope: -315.20978
+=======
+        outSlope: -315.21115
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -73444,9 +73510,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.43333337
+<<<<<<< HEAD
         value: 32.95095
         inSlope: 408.40372
         outSlope: 408.40372
+=======
+        value: 32.950954
+        inSlope: 408.40475
+        outSlope: 408.40475
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -73597,9 +73669,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
+<<<<<<< HEAD
         value: 38.26064
         inSlope: 105.0936
         outSlope: 105.09322
+=======
+        value: 38.260635
+        inSlope: 105.09394
+        outSlope: 105.09494
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -74462,8 +74540,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+<<<<<<< HEAD
   - time: 0.56666666
     functionName: <Awake>g__HasTarget|13_1
+=======
+  - time: 0.6666667
+    functionName: 
+>>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
