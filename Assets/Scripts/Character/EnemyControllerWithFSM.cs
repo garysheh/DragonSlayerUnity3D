@@ -36,6 +36,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
     //  attack timer
     [HideInInspector]
     public float attackCD;
+    public float skillCD;
 
     private void Awake()
     {
@@ -46,6 +47,8 @@ public class EnemyControllerWithFSM : MonoBehaviour
         attackTarget = GameObject.FindGameObjectWithTag("Player");
 
         refreshPoint = transform.position;
+        skillCD = enemyStats.SkillCD;
+
         #region State Machine Initialization
         enemyFSM = new FSM();
         var guardState = new GuardState(this, agent, anim, refreshPoint, refreshRotation);
@@ -82,16 +85,13 @@ public class EnemyControllerWithFSM : MonoBehaviour
         Func<bool> IsDead() => () => IsHealthZero() == true;
     } 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
         //  attack timer
         attackCD -= Time.deltaTime;
+        skillCD -= Time.deltaTime;
+
         enemyFSM.Tick();
     }
 
@@ -105,6 +105,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
     {
         if (attackTarget != null)
         {
+            Debug.Log("Dis: "+Vector3.Distance(attackTarget.transform.position, transform.position));
             return Vector3.Distance(attackTarget.transform.position, transform.position);
         }
         return Mathf.Infinity;
@@ -112,11 +113,8 @@ public class EnemyControllerWithFSM : MonoBehaviour
 
     public float MaxCombatRange()
     {
-        if (enemyStats.SkillRange != null)
-        {
-            return Mathf.Max(enemyStats.AttackRange, enemyStats.SkillRange.Max()); 
-        }
-        return enemyStats.AttackRange;
+        Debug.Log(enemyStats.AttackRange);
+        return Mathf.Max(enemyStats.AttackRange, enemyStats.SkillRange);    
     }
 
     public bool FoundPlayer()

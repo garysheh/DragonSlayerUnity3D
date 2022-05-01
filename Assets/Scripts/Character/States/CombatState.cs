@@ -23,15 +23,19 @@ public class CombatState : EnemyStates
     public void Tick()
     {
         controller.transform.LookAt(attackTarget.transform);
-        if (controller.attackCD < 0)
+        if (controller.skillCD <= 0 && enemyStats.attackData.skillRange != 0)
+        {
+            controller.skillCD = enemyStats.attackData.skillRange;
+            animator.SetTrigger("Skill");
+        }
+        else if (controller.attackCD <= 0)
         {
             //  refresh attack cd
             controller.attackCD = enemyStats.attackData.attackCD;
             CriticalCheck();
             animator.SetBool("Critical", enemyStats.isCrit);
             animator.SetTrigger("Attack");
-            targetStats.takeDamage(enemyStats, targetStats);
-            Debug.Log("HP: " + targetStats.CurrentHealth);
+            //targetStats.takeDamage(enemyStats, targetStats);
         }
     }
 

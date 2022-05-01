@@ -173,6 +173,44 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public float SkillRange
+    {
+        get
+        {
+            if (attackData != null)
+            {
+                return attackData.skillRange;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            attackData.skillRange = value;
+        }
+    }
+
+    public float SkillCD
+    {
+        get
+        {
+            if (attackData != null)
+            {
+                return attackData.skillCD;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        set
+        {
+            attackData.skillCD = value;
+        }
+    }
+
     public int MinDamage
     {
         get
@@ -250,102 +288,6 @@ public class CharacterStats : MonoBehaviour
     }
     #endregion
 
-    #region from Skill_SO
-    public string[] SkillName
-    {
-        get
-        {
-            if (skillData != null)
-            {
-                return skillData.skillName;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        set
-        {
-                skillData.skillName = value;
-        }
-    }
-
-    public int[] ManaCost
-    {
-        get
-        {
-            if (skillData != null)
-            {
-                return skillData.manaCost;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        set
-        {
-            skillData.manaCost = value;
-        }
-    }
-
-    public int[] SkillDamage
-    {
-        get
-        {
-            if (skillData != null)
-            {
-                return skillData.skillDamage;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        set
-        {
-            skillData.skillDamage = value;
-        }
-    }
-
-    public int[] SkillCD
-    {
-        get
-        {
-            if (skillData != null)
-            {
-                return skillData.skillCD;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        set
-        {
-            skillData.skillCD = value;
-        }
-    }
-
-    public float[] SkillRange
-    {
-        get
-        {
-            if (skillData != null)
-            {
-                return skillData.skillRange;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        set
-        {
-            skillData.skillRange = value;
-        }
-    }
-    #endregion
 
     #region combat related
     public void takeDamage(CharacterStats attacker, CharacterStats defender)

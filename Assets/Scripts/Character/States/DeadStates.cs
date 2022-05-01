@@ -23,9 +23,9 @@ public class DeadState : EnemyStates
 
     public void OnEnter()
     {
+        animator.SetBool("Dead", true);
         collider.enabled = false;
         agent.enabled = false;
-        animator.SetBool("Dead", true);
     }
     public void OnExit()
     {
