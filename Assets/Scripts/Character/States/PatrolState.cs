@@ -39,6 +39,7 @@ public class PatrolState : EnemyStates
         }
         else
         {
+            animator.SetBool("Walk", true);
             MoveToWayPoint();
 
         }
@@ -77,5 +78,6 @@ public class PatrolState : EnemyStates
     public void OnExit()
     {
         agent.speed *= 2.0f;
+        animator.SetBool("Walk", true);
     }
 }

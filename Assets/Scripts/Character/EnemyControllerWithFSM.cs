@@ -23,6 +23,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
     [Header("Basic Settings")]
     public float sightRadius;
     public bool isGuard;
+    [HideInInspector]
     public GameObject attackTarget;
 
     [Header("Patrol Settings")]
@@ -47,6 +48,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
         enemyStats = GetComponent<CharacterStats>();
         coll = GetComponent<Collider>();
         attackTarget = GameObject.FindGameObjectWithTag("Player");
+        //Debug.Log(attackTarget.name);
 
         refreshPoint = transform.position;
         skillCD = enemyStats.SkillCD;
