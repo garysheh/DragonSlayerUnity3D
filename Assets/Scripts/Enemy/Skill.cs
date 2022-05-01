@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected EnemyControllerWithFSM controller;
 
-    // Update is called once per frame
-    void Update()
+    [Header("Skill")]
+    public float force = 100f;
+    public int damage;
+    protected CharacterStats targetStats;
+
+    private void Awake()
     {
-        
+        controller = GetComponent<EnemyControllerWithFSM>();
+        targetStats = controller.attackTarget.GetComponent<CharacterStats>();
     }
 }
