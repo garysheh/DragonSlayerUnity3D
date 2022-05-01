@@ -1,21 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BeastlySlash : MonoBehaviour
+public class BeastlySlash : Skill
 {
-    private EnemyControllerWithFSM controller;
-
-    [Header("Skill")]
-    public float force = 100f;
-    public int damage;
-    private CharacterStats targetStats;
-
-    private void Awake()
-    {
-        controller = GetComponent<EnemyControllerWithFSM>();
-        targetStats = controller.attackTarget.GetComponent<CharacterStats>();
-    }
-
     public void Slash()
     {
         if (transform.IsTargetInfront(controller.attackTarget.transform))
