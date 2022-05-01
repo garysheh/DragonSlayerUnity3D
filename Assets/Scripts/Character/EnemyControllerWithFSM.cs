@@ -35,9 +35,9 @@ public class EnemyControllerWithFSM : MonoBehaviour
     private Quaternion refreshRotation;
 
     //  attack timer
-    //[HideInInspector]
+    [HideInInspector]
     public float attackCD;
-    //[HideInInspector]
+    [HideInInspector]
     public float skillCD;
 
     private void Awake()
@@ -128,7 +128,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
     //  animation event
     void Attack()
     {
-        if (attackTarget != null)
+        if (transform.IsTargetInfront(attackTarget.transform))
         {
             CharacterStats targetStats = attackTarget.GetComponent<CharacterStats>();
             CriticalCheck();

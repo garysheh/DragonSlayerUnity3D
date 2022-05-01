@@ -9,7 +9,6 @@ public class CharacterStats : MonoBehaviour
     public CharacterData_SO characterStats;
     private CharacterData_SO characterStats_instance;
     public AttackData_SO attackData;
-    public SkillData_SO skillData;
 
     [HideInInspector]
     public bool isCrit = false;
