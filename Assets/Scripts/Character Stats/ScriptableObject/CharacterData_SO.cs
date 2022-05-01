@@ -14,14 +14,17 @@ public class CharacterData_SO : ScriptableObject
     public int baseDefence;
     public int currentDefence;
 
+    [Header("EXP")]
+    public int enemyExp;
+
     [Header("Level")]
     public int curlevel; // current level;
     public int topLevel; // maximum level;
-    public int expBase; // exp base
+    public int expBase; // total exp that player needs for level up
     public int curExp; // current exp
-    public float levelBuff;
+    public float levelBuff; // the leveling percent for player' properties while leveling
 
-    public float levelMultiplier
+    public float levelCalculator
     {
         get
         {
@@ -42,8 +45,10 @@ public class CharacterData_SO : ScriptableObject
     void leveling()
     {
         curlevel = Mathf.Clamp(curlevel + 1, 0, topLevel); // to distingush between level 0 to the maximum level;
-        expBase += (int)(expBase * levelMultiplier);
-        maxHealth = (int)(maxHealth * levelMultiplier);
+        expBase += (int)(expBase * levelCalculator);
+        maxHealth = (int)(maxHealth * levelCalculator);
+        currentHealth = maxHealth;
 
+        Debug.Log("LEVEL UP!" + curlevel + "MAX HEALTH:" + maxHealth);
     }
 }

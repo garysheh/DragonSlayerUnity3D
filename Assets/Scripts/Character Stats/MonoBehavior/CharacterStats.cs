@@ -304,6 +304,10 @@ public class CharacterStats : MonoBehaviour
         //  TODO: UI update
         healthBarwithAttack?.Invoke(CurrentHealth, MaxHealth);
         //  TODO: leveling
+        if(CurrentHealth <= 0)
+        {
+            attacker.characterStats.getExp(characterStats.enemyExp);
+        }
     }
 
     //  for skill attack, damage is given on skill script
