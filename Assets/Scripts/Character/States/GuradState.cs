@@ -24,11 +24,10 @@ public class GuardState : EnemyStates
         {
             agent.destination = controller.transform.position;
             controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, refreshRotation, 0.05f);
-            animator.SetBool("Walk", false);
+            agent.isStopped = true;
         }
         else
         {
-            animator.SetBool("Walk", true);
             agent.isStopped = false;
             agent.destination = refreshPoint;
         }
@@ -36,10 +35,11 @@ public class GuardState : EnemyStates
 
     public void OnEnter()
     {
+        agent.isStopped = true;
+        animator.SetBool("Walk", true);
     }
 
     public void OnExit()
     {
-        animator.SetBool("Walk", false);
     }
 }

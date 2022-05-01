@@ -22,30 +22,40 @@ public class CombatState : EnemyStates
 
     public void Tick()
     {
+
+        controller.skillCD -= Time.deltaTime;
         controller.transform.LookAt(attackTarget.transform);
-        if (controller.skillCD <= 0 && enemyStats.attackData.skillRange != 0)
+        if (controller.skillCD <= 0 && enemyStats.SkillCD != 0)
         {
-            controller.skillCD = enemyStats.attackData.skillRange;
             animator.SetTrigger("Skill");
+            controller.skillCD = enemyStats.SkillCD;
         }
         else if (controller.attackCD <= 0)
         {
-            //  refresh attack cd
-            controller.attackCD = enemyStats.attackData.attackCD;
-            CriticalCheck();
-            animator.SetBool("Critical", enemyStats.isCrit);
-            animator.SetTrigger("Attack");
-            //targetStats.takeDamage(enemyStats, targetStats);
-        }
-    }
 
-    void CriticalCheck()
-    {
-        enemyStats.isCrit = Random.value < enemyStats.attackData.critChance;
+            if (!controller.TargetInAttackRange())
+            {
+                agent.isStopped = false;
+                agent.SetDestination(attackTarget.transform.position);
+                animator.SetBool("Walk", true);
+            }
+            else
+            {
+                agent.isStopped = true;
+                animator.SetBool("Walk", false);
+                //  refresh attack cd
+                controller.attackCD = enemyStats.AttackCD;
+                controller.CriticalCheck();
+                animator.SetBool("Critical", enemyStats.isCrit);
+                animator.SetTrigger("Attack");
+                //targetStats.takeDamage(enemyStats, targetStats);
+            }
+        }
     }
 
     public void OnEnter()
     {
+        animator.SetBool("Chase", true);
         agent.isStopped = true;
     }
     public void OnExit()

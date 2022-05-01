@@ -34,8 +34,9 @@ public class EnemyControllerWithFSM : MonoBehaviour
     private Quaternion refreshRotation;
 
     //  attack timer
-    [HideInInspector]
+    //[HideInInspector]
     public float attackCD;
+    //[HideInInspector]
     public float skillCD;
 
     private void Awake()
@@ -90,8 +91,6 @@ public class EnemyControllerWithFSM : MonoBehaviour
     {
         //  attack timer
         attackCD -= Time.deltaTime;
-        skillCD -= Time.deltaTime;
-
         enemyFSM.Tick();
     }
 
@@ -105,7 +104,6 @@ public class EnemyControllerWithFSM : MonoBehaviour
     {
         if (attackTarget != null)
         {
-            Debug.Log("Dis: "+Vector3.Distance(attackTarget.transform.position, transform.position));
             return Vector3.Distance(attackTarget.transform.position, transform.position);
         }
         return Mathf.Infinity;
@@ -113,7 +111,6 @@ public class EnemyControllerWithFSM : MonoBehaviour
 
     public float MaxCombatRange()
     {
-        Debug.Log(enemyStats.AttackRange);
         return Mathf.Max(enemyStats.AttackRange, enemyStats.SkillRange);    
     }
 
@@ -156,6 +153,22 @@ public class EnemyControllerWithFSM : MonoBehaviour
         return (attackTarget != null) ?
             Vector3.Distance(attackTarget.transform.position, transform.position) <= enemyStats.attackData.attackRange :
             false;
+    }
+
+    //  animation event
+    void Attack()
+    {
+        if (attackTarget != null)
+        {
+            CharacterStats targetStats = attackTarget.GetComponent<CharacterStats>();
+            CriticalCheck();
+            targetStats.takeDamage(enemyStats, targetStats);
+        }
+    }
+
+    public void CriticalCheck()
+    {
+        enemyStats.isCrit = UnityEngine.Random.value < enemyStats.attackData.critChance;
     }
 
     void OnDrawGizmosSelected()

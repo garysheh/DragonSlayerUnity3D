@@ -21,9 +21,10 @@ public class ChaseState : EnemyStates
     public void OnEnter()
     {
         agent.isStopped = false;
-        animator.SetBool("Follow", true);
         animator.SetBool("Chase", true);
+        animator.SetBool("Follow", true);
     }
+
     public void OnExit()
     {
         animator.SetBool("Chase", false);

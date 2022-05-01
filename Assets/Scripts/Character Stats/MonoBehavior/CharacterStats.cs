@@ -307,6 +307,13 @@ public class CharacterStats : MonoBehaviour
         //  TODO: leveling
     }
 
+    //  for skill attack, damage is given on skill script
+    public void takeDamage(CharacterStats attacker, CharacterStats defender, int damage)
+    {
+        CurrentHealth = Mathf.Max((CurrentHealth - damage), 0);
+        healthBarwithAttack?.Invoke(CurrentHealth, MaxHealth);
+    }
+
     public int damageCalc()
     {
         float damage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);
