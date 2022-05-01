@@ -25,7 +25,7 @@ public class BeastlySlash : MonoBehaviour
             Vector3 direction = controller.attackTarget.transform.position - transform.position;
             direction.Normalize();
 
-            controller.attackTarget.GetComponent<NavMeshAgent>().isStopped = true;
+            controller.attackTarget.GetComponent<NavMeshAgent>().isStopped = false;
             controller.attackTarget.GetComponent<NavMeshAgent>().velocity = direction * force;
 
             CharacterStats targetStats = controller.attackTarget.GetComponent<CharacterStats>();

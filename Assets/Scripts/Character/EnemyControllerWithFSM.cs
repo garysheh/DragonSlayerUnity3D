@@ -30,7 +30,8 @@ public class EnemyControllerWithFSM : MonoBehaviour
     public float patrolGapTime;
 
     //  guard info
-    private Vector3 refreshPoint;
+    [HideInInspector]
+    public Vector3 refreshPoint;
     private Quaternion refreshRotation;
 
     //  attack timer
@@ -102,11 +103,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
 
     public float DistanceFromTarget()
     {
-        if (attackTarget != null)
-        {
-            return Vector3.Distance(attackTarget.transform.position, transform.position);
-        }
-        return Mathf.Infinity;
+        return Vector3.Distance(attackTarget.transform.position, transform.position);
     }
 
     public float MaxCombatRange()
@@ -126,33 +123,6 @@ public class EnemyControllerWithFSM : MonoBehaviour
             }
         }
         return foundPlayer;
-    }
-
-    public Vector3 GetNewWayPoint()
-    {
-        float randomX = UnityEngine.Random.Range(-patrolRadius, patrolRadius);
-        float randomZ = UnityEngine.Random.Range(-patrolRadius, patrolRadius);
-        Vector3 randomPoint = new Vector3(refreshPoint.x + randomX,
-                                        transform.position.y,
-                                        refreshPoint.z + randomZ);
-        NavMeshHit hit;
-
-        var point =  (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, 1)) ?
-            hit.position :
-            transform.position;
-        return point;
-    }
-
-    public bool IsPointReached(Vector3 point)
-    {
-        return Vector3.SqrMagnitude(point - transform.position) <= agent.stoppingDistance;
-    }
-
-    public bool TargetInAttackRange()
-    {
-        return (attackTarget != null) ?
-            Vector3.Distance(attackTarget.transform.position, transform.position) <= enemyStats.attackData.attackRange :
-            false;
     }
 
     //  animation event

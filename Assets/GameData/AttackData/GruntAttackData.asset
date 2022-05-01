@@ -17,6 +17,6 @@ MonoBehaviour:
   minDamage: 5
   maxDamage: 10
   skillRange: 2.5
-  skillCD: 8
+  skillCD: 5
   critMultiplier: 2
   critChance: 1

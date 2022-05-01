@@ -25,15 +25,14 @@ public class CombatState : EnemyStates
 
         controller.skillCD -= Time.deltaTime;
         controller.transform.LookAt(attackTarget.transform);
-        if (controller.skillCD <= 0 && enemyStats.SkillCD != 0)
+        if (controller.skillCD <= 0 && TargetInSkillRange() && enemyStats.SkillCD != 0)
         {
             animator.SetTrigger("Skill");
             controller.skillCD = enemyStats.SkillCD;
         }
         else if (controller.attackCD <= 0)
         {
-
-            if (!controller.TargetInAttackRange())
+            if (!TargetInAttackRange())
             {
                 agent.isStopped = false;
                 agent.SetDestination(attackTarget.transform.position);
@@ -52,6 +51,18 @@ public class CombatState : EnemyStates
             }
         }
     }
+
+    bool TargetInAttackRange()
+    {
+        return controller.DistanceFromTarget() <= enemyStats.attackData.attackRange;
+            
+    }
+
+    bool TargetInSkillRange()
+    {
+        return controller.DistanceFromTarget() <= enemyStats.attackData.skillRange;
+    }
+
 
     public void OnEnter()
     {
