@@ -20,7 +20,7 @@ public class GuardState : EnemyStates
 
     public void Tick()
     {
-        if (controller.IsPointReached(refreshPoint))
+        if (IsPointReached(refreshPoint))
         {
             agent.destination = controller.transform.position;
             controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, refreshRotation, 0.05f);
@@ -32,6 +32,11 @@ public class GuardState : EnemyStates
             agent.isStopped = false;
             agent.destination = refreshPoint;
         }
+    }
+
+    private bool IsPointReached(Vector3 point)
+    {
+        return Vector3.SqrMagnitude(point - controller.transform.position) <= agent.stoppingDistance;
     }
 
     public void OnEnter()
