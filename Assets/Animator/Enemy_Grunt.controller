@@ -56,14 +56,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-<<<<<<< HEAD
-    m_ConditionEvent: Skill
-=======
     m_ConditionEvent: Attack
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Critical
->>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1143857443939637070}
@@ -154,11 +150,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3298244918976866685}
-<<<<<<< HEAD
-    m_Position: {x: 20, y: 20, z: 0}
-=======
     m_Position: {x: 40, y: 10, z: 0}
->>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
   - serializedVersion: 1
     m_State: {fileID: -1143857443939637070}
     m_Position: {x: 610, y: 10, z: 0}
@@ -342,11 +334,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-<<<<<<< HEAD
-  m_Motion: {fileID: 7400000, guid: f10541572d6d93144ab62d62774e6af5, type: 2}
-=======
   m_Motion: {fileID: 7400000, guid: 7d58521943eb42b4c9b63ded3906e306, type: 2}
->>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -423,11 +411,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-<<<<<<< HEAD
-  m_Motion: {fileID: 7400000, guid: 7d58521943eb42b4c9b63ded3906e306, type: 2}
-=======
   m_Motion: {fileID: 7400000, guid: f10541572d6d93144ab62d62774e6af5, type: 2}
->>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -444,12 +428,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Attack
     m_EventTreshold: 0
-<<<<<<< HEAD
-=======
   - m_ConditionMode: 1
     m_ConditionEvent: Critical
     m_EventTreshold: 0
->>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3298244918976866685}
   m_Solo: 0
@@ -539,15 +520,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-<<<<<<< HEAD
-  - m_Name: Skill
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-=======
->>>>>>> 6afc6fed181a3588ca06ead569907fc251ea37c4
   - m_Name: GetHit
     m_Type: 9
     m_DefaultFloat: 0
