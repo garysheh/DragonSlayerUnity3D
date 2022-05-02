@@ -45,6 +45,6 @@ public class GuardState : EnemyStates
 
     public void OnExit()
     {
-        animator.SetBool("Walk", true);
+        animator.SetBool("Walk", false);
     }
 }

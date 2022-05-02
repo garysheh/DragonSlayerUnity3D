@@ -18,30 +18,33 @@ public class CombatState : EnemyStates
         this.enemyStats = enemyStats;
         this.attackTarget = target;
         this.targetStats = attackTarget.GetComponent<CharacterStats>();
+
     }
 
     public void Tick()
     {
-
         controller.skillCD -= Time.deltaTime;
         controller.transform.LookAt(attackTarget.transform);
-        if (controller.skillCD <= 0 && TargetInSkillRange() && enemyStats.SkillCD != 0)
+
+        if (controller.skillCD < 0 && TargetInSkillRange())
         {
             animator.SetTrigger("Skill");
             controller.skillCD = enemyStats.SkillCD;
+            Debug.Log(enemyStats.SkillCD);
+            Debug.Log("current: " + enemyStats.SkillCD);
         }
         else if (controller.attackCD <= 0)
         {
             if (!TargetInAttackRange())
             {
                 agent.isStopped = false;
+                animator.SetBool("Follow", true);
                 agent.SetDestination(attackTarget.transform.position);
-                animator.SetBool("Walk", true);
             }
             else
             {
                 agent.isStopped = true;
-                animator.SetBool("Walk", false);
+                animator.SetBool("Follow", false);
                 //  refresh attack cd
                 controller.attackCD = enemyStats.AttackCD;
                 controller.CriticalCheck();
@@ -66,6 +69,8 @@ public class CombatState : EnemyStates
 
     public void OnEnter()
     {
+        animator.SetBool("Walk", false);
+        animator.SetBool("Follow", true);
         animator.SetBool("Chase", true);
         agent.isStopped = true;
     }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4f810e84de64ba59d8c6a546fd631d, type: 3}
   m_Name: WizardData
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 10
+  maxHealth: 1000
+  currentHealth: 1000
   maxMana: 0
   currentMana: 0
   baseDefence: 5

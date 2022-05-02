@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ExtensionMethod
 {
-    private const float threshold = 0.1f;
+    private const float threshold = 0.5f;
     public static bool IsTargetInfront(this Transform transform, Transform target)
     {
         var vectorToTarget = target.position - transform.position;

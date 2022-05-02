@@ -36,9 +36,9 @@ public class EnemyControllerWithFSM : MonoBehaviour
     private Quaternion refreshRotation;
 
     //  attack timer
-    [HideInInspector]
+    //[HideInInspector]
     public float attackCD;
-    [HideInInspector]
+    //[HideInInspector]
     public float skillCD;
 
     private void Awake()
@@ -48,7 +48,6 @@ public class EnemyControllerWithFSM : MonoBehaviour
         enemyStats = GetComponent<CharacterStats>();
         coll = GetComponent<Collider>();
         attackTarget = GameObject.FindGameObjectWithTag("Player");
-        //Debug.Log(attackTarget.name);
 
         refreshPoint = transform.position;
         skillCD = enemyStats.SkillCD;

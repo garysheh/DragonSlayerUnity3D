@@ -74470,7 +74470,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.96666664
-    functionName: Slash
+    functionName: KnockOff
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

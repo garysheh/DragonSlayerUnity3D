@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private GameObject attackEnemy; // object to attack
     private float cd; // normal attack cooldown
     private bool deadmode; // when player is dead
-
+    private float stopDistance;
 
     void Update()
     {
@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
+        stopDistance = agent.stoppingDistance;
     }
 
 
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
     public void MoveToTarget(Vector3 target)
     {
         StopAllCoroutines();
+        agent.stoppingDistance = stopDistance;
         agent.isStopped = false;
         agent.destination = target;
     }
@@ -103,6 +105,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator MoveToEnemy()
     {
         agent.isStopped = false; // to make sure the character keeps chasing to the enemy
+        agent.stoppingDistance = characterStats.AttackRange;
         transform.LookAt(attackEnemy.transform);
         while(Vector3.Distance(attackEnemy.transform.position, transform.position) > characterStats.AttackRange)
         {
