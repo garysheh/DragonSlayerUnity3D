@@ -32,7 +32,7 @@ public class Skill : MonoBehaviour
 
             CharacterStats targetStats = controller.attackTarget.GetComponent<CharacterStats>();
 
-            targetStats.takeDamage(this.GetComponent<CharacterStats>(), targetStats, damage);
+            targetStats.TakeDamage(damage);
         }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,5 +10,7 @@ public class RockShot : Skill
     {
         int index = Random.Range(0, 3);
         var rock = Instantiate(rocks[index], handPosition.position, Quaternion.identity);
+        rock.GetComponent<Rock>().FlyToTarget(damage);
+        GetComponent<NavMeshAgent>().SetDestination(GetComponent<EnemyControllerWithFSM>().attackTarget.transform.position);
     }
 }
