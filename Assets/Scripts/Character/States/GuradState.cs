@@ -22,12 +22,14 @@ public class GuardState : EnemyStates
     {
         if (IsPointReached(refreshPoint))
         {
+            Debug.Log("reached");
             agent.destination = controller.transform.position;
             controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, refreshRotation, 0.05f);
             animator.SetBool("Walk", false);
         }
         else
         {
+            Debug.Log("not reached");
             animator.SetBool("Walk", true);
             agent.isStopped = false;
             agent.destination = refreshPoint;
@@ -41,6 +43,7 @@ public class GuardState : EnemyStates
 
     public void OnEnter()
     {
+        animator.SetBool("Walk", false);
     }
 
     public void OnExit()
