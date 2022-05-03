@@ -50,6 +50,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
         attackTarget = GameObject.FindGameObjectWithTag("Player");
 
         refreshPoint = transform.position;
+        refreshRotation = transform.rotation;
         skillCD = enemyStats.SkillCD;
 
         #region State Machine Initialization
@@ -129,11 +130,12 @@ public class EnemyControllerWithFSM : MonoBehaviour
     //  animation event
     void Attack()
     {
-        if (transform.IsTargetInfront(attackTarget.transform))
+        if (transform.IsTargetInfront(attackTarget.transform)
+            && DistanceFromTarget() <= enemyStats.AttackRange)
         {
             CharacterStats targetStats = attackTarget.GetComponent<CharacterStats>();
             CriticalCheck();
-            targetStats.takeDamage(enemyStats, targetStats);
+            targetStats.TakeDamage(enemyStats, targetStats);
         }
     }
 

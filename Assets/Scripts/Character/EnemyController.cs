@@ -276,7 +276,7 @@ public class EnemyController : MonoBehaviour
         if (attackTarget != null)
         {
             CharacterStats targetStats = attackTarget.GetComponent<CharacterStats>();
-            targetStats.takeDamage(enemyStats, targetStats);
+            targetStats.TakeDamage(enemyStats, targetStats);
         }
     }
 

@@ -133,6 +133,8 @@ public class CharacterStats : MonoBehaviour
             characterStats_instance.currentDefence = value;
         }
     }
+
+
     #endregion
 
     #region from Attack_SO
@@ -291,10 +293,10 @@ public class CharacterStats : MonoBehaviour
 
 
     #region combat related
-    public void takeDamage(CharacterStats attacker, CharacterStats defender)
+    public void TakeDamage(CharacterStats attacker, CharacterStats defender)
     {
         //  default damge is 1
-        int damage = Mathf.Max((attacker.damageCalc() - defender.CurrentDefence), 1);
+        int damage = Mathf.Max((attacker.DamageCalc() - defender.CurrentDefence), 1);
         CurrentHealth = Mathf.Max((CurrentHealth - damage), 0);
 
         if (isCrit)
@@ -311,13 +313,13 @@ public class CharacterStats : MonoBehaviour
     }
 
     //  for skill attack, damage is given on skill script
-    public void takeDamage(CharacterStats attacker, CharacterStats defender, int damage)
+    public void TakeDamage(int damage)
     {
         CurrentHealth = Mathf.Max((CurrentHealth - damage), 0);
         healthBarwithAttack?.Invoke(CurrentHealth, MaxHealth);
     }
 
-    public int damageCalc()
+    public int DamageCalc()
     {
         float damage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);
         return isCrit ? (int)(damage * attackData.critMultiplier) : (int)damage;

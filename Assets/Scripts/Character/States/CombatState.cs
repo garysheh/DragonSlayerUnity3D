@@ -30,8 +30,6 @@ public class CombatState : EnemyStates
         {
             animator.SetTrigger("Skill");
             controller.skillCD = enemyStats.SkillCD;
-            Debug.Log(enemyStats.SkillCD);
-            Debug.Log("current: " + enemyStats.SkillCD);
         }
         else if (controller.attackCD <= 0)
         {
@@ -43,6 +41,7 @@ public class CombatState : EnemyStates
             }
             else
             {
+                Debug.Log("in here");
                 agent.isStopped = true;
                 animator.SetBool("Follow", false);
                 //  refresh attack cd
