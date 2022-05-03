@@ -14,7 +14,7 @@ public class BeastlySlash : Skill
             CharacterStats targetStats = controller.attackTarget.GetComponent<CharacterStats>();
 
             targetStats.isCrit = false;
-            targetStats.takeDamage(this.GetComponent<CharacterStats>(), targetStats);
+            targetStats.TakeDamage(this.GetComponent<CharacterStats>(), targetStats);
         }
     }
 

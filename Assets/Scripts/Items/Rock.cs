@@ -9,18 +9,19 @@ public class Rock : MonoBehaviour
     public float force;
     public GameObject target;
     private Vector3 direction;
+    private int damage;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player");
-        FlyToTarget();
     }
 
-    public void FlyToTarget()
+    public void FlyToTarget(int damage)
     {
         direction = (target.transform.position - transform.position + Vector3.up).normalized;
         rb.AddForce(direction * force, ForceMode.Impulse);
+        this.damage = damage;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,6 +35,7 @@ public class Rock : MonoBehaviour
         {
             collision.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
             collision.gameObject.GetComponent<Animator>().SetTrigger("Dizzy");
+            collision.gameObject.GetComponent<CharacterStats>().TakeDamage(damage);
         }
     }
 }

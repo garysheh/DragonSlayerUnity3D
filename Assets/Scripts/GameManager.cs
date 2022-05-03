@@ -5,10 +5,10 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
      
-    public CharacterStats plaerStats;
+    public CharacterStats playerStats;
 
     public void RigisterPlayer(CharacterStats player)
     {
-        plaerStats = player;
+        playerStats = player;
     }
 }

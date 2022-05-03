@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
     {
         MouseController.Instance.OnMouseClicked += MoveToTarget;
         MouseController.Instance.OnEnemyClicked += AttackEnemy;
+
+        GameManager.Instance.RigisterPlayer(characterStats);
     }
 
     private void SwitchAnimation()
@@ -127,6 +129,6 @@ public class PlayerController : MonoBehaviour
     void attack()
     {
         var EnemyStats = attackEnemy.GetComponent<CharacterStats>();
-        EnemyStats.takeDamage(characterStats, EnemyStats);
+        EnemyStats.TakeDamage(characterStats, EnemyStats);
     }
 }
