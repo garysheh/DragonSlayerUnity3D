@@ -4,15 +4,41 @@ using UnityEngine;
 
 public class TransitionPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum TransitionType
     {
-        
+        SameScene, DifferetScene
     }
 
-    // Update is called once per frame
+    [Header("Transport")]
+    public string sceneName;
+    public TransitionType transitionType;
+
+    public TransitionDestination.DestinationTag destinationTag;
+
+    public bool transON;
+
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.F) && transON)
+        {
+            SceneController.Instance.Transport(this);
+        }
     }
+
+    void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            transON = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            transON = false;
+        }
+    }
+
 }

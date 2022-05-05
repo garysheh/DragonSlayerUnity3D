@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5298966561368520326}
   - component: {fileID: 5308543313288423658}
   - component: {fileID: 18393284247311487}
+  - component: {fileID: 5324987819815323229}
   m_Layer: 0
   m_Name: Portal 3
   m_TagString: Untagged
@@ -99,6 +100,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975d658eabf0843c8ba9ba9ef676cbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: 
+  transitionType: 0
+  destinationTag: 0
+--- !u!65 &5324987819815323229
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5330032349581693578}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.2470393, y: 1.6061739, z: 3.17803}
+  m_Center: {x: -0.092028625, y: 0.8032729, z: -0.049251795}
 --- !u!1 &5330036473709389890
 GameObject:
   m_ObjectHideFlags: 0
@@ -19638,7 +19655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6422414283474484020}
-  - component: {fileID: 5496178618470032035}
+  - component: {fileID: 1588370775729615571}
   m_Layer: 0
   m_Name: DestinationPoint
   m_TagString: Untagged
@@ -19661,7 +19678,7 @@ Transform:
   m_Father: {fileID: 5327216313943166520}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5496178618470032035
+--- !u!114 &1588370775729615571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19670,6 +19687,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8176988065004251302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82cb512415e054ce69196b921be3fdb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 096018e03718a44a0931b961eb6a29fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destinationTag: 0
