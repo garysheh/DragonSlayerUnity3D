@@ -9,7 +9,6 @@ public class PlayerInfoUI : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(transform.GetChild(0).GetComponent<TextMeshProUGUI>());
         level = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         health = transform.GetChild(1).GetChild(0).GetComponent<Image>();
         exp = transform.GetChild(2).GetChild(0).GetComponent<Image>();
