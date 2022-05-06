@@ -6,7 +6,7 @@ public class TransitionPoint : MonoBehaviour
 {
     public enum TransitionType
     {
-        SameScene, DifferetScene
+        SameScene, DifferentScene
     }
 
     [Header("Transport")]
