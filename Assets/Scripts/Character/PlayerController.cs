@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     void AnimationControl()
     {
         animator.SetFloat("Speed",agent.velocity.sqrMagnitude);
+        animator.SetBool("Dead", deadmode);
     }
     void Awake()
     {
@@ -115,29 +116,35 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator MoveToEnemy()
     {
-        agent.isStopped = false; // to make sure the character keeps chasing to the enemy
-        agent.stoppingDistance = characterStats.AttackRange;
-        transform.LookAt(attackEnemy.transform);
-        while(Vector3.Distance(attackEnemy.transform.position, transform.position) > characterStats.AttackRange)
+        if (deadmode != true)
         {
-            agent.destination = attackEnemy.transform.position;
-            yield return null;
-        }
-        // when close to the enemy, character stops
-        agent.isStopped = true;
-        // attack part
-        if (cd < 0)
-        {
-            animator.SetBool("Critical", characterStats.isCrit);
-            animator.SetTrigger("Attack");
-            // refresh cooldown
-            cd = characterStats.attackData.attackCD;
+            agent.isStopped = false; // to make sure the character keeps chasing to the enemy
+            agent.stoppingDistance = characterStats.AttackRange;
+            transform.LookAt(attackEnemy.transform);
+            while (Vector3.Distance(attackEnemy.transform.position, transform.position) > characterStats.AttackRange)
+            {
+                agent.destination = attackEnemy.transform.position;
+                yield return null;
+            }
+            // when close to the enemy, character stops
+            agent.isStopped = true;
+            // attack part
+            if (cd < 0)
+            {
+                animator.SetBool("Critical", characterStats.isCrit);
+                animator.SetTrigger("Attack");
+                // refresh cooldown
+                cd = characterStats.attackData.attackCD;
+            }
         }
     }
 
     void attack()
     {
-        var EnemyStats = attackEnemy.GetComponent<CharacterStats>();
-        EnemyStats.TakeDamage(characterStats, EnemyStats);
+        if (deadmode != true)
+        {
+            var EnemyStats = attackEnemy.GetComponent<CharacterStats>();
+            EnemyStats.TakeDamage(characterStats, EnemyStats);
+        }
     }
 }

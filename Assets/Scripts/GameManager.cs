@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Cinemachine;
+using UnityEngine.AI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -16,6 +14,15 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(this);
     }
 
+    public void Update()
+    {
+        if (!IsPlayerAlive())
+        {
+            NavMeshAgent agent = playerStats.gameObject.GetComponent<NavMeshAgent>();
+            agent.isStopped = true;
+        }
+    }
+
     public void RigisterPlayer(CharacterStats player)
     {
         playerStats = player;
@@ -26,5 +33,10 @@ public class GameManager : Singleton<GameManager>
             freeLook.Follow = playerStats.transform.GetChild(3);
             freeLook.LookAt = playerStats.transform.GetChild(3);
         } 
+    }
+
+    public bool IsPlayerAlive()
+    {
+        return playerStats.CurrentHealth != 0;
     }
 }

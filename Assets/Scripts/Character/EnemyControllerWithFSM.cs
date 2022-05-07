@@ -41,6 +41,9 @@ public class EnemyControllerWithFSM : MonoBehaviour
     //[HideInInspector]
     public float skillCD;
 
+    //[HideInInspector]
+    public bool gameOver;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -60,6 +63,8 @@ public class EnemyControllerWithFSM : MonoBehaviour
         var chaseState = new ChaseState(agent, anim, attackTarget);
         var combatState = new CombatState(this, agent, anim, enemyStats, attackTarget);
         var deadState = new DeadState(this, agent, anim, coll);
+        var winState = new WinState(this, agent, anim);
+
         Debug.Log("all states have been initialized");
         //  when(a, b, c); when "a" is valid go from b to c;
         When(HasTarget(), guardState, chaseState);
@@ -69,6 +74,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
         When(LostTargetAndWasGuard(), chaseState, guardState);
         When(LostTargetAndWasPatrol(), chaseState, patrolState);
         enemyFSM.AddAnyTransition(IsDead(), deadState);
+        enemyFSM.AddAnyTransition(IsWin(), winState);
 
         if (isGuard)
         {
@@ -87,6 +93,9 @@ public class EnemyControllerWithFSM : MonoBehaviour
         Func<bool> LostTargetAndWasGuard() => () => !FoundPlayer() && (isGuard == true);
         Func<bool> LostTargetAndWasPatrol() => () => !FoundPlayer() && (isGuard == false);
         Func<bool> IsDead() => () => IsHealthZero() == true;
+        Func<bool> IsWin() => () => IsEnemyWin() == true;
+
+        gameOver = false;
     } 
 
     // Update is called once per frame
@@ -94,13 +103,20 @@ public class EnemyControllerWithFSM : MonoBehaviour
     {
         //  attack timer
         attackCD -= Time.deltaTime;
-        enemyFSM.Tick();
+        if (!gameOver)
+            enemyFSM.Tick();
     }
 
+    #region Helper Methods
     public bool IsHealthZero()
     { 
         //  when enemy is dead return 0;
         return enemyStats.CurrentHealth == 0;
+    }
+
+    public bool IsEnemyWin()
+    {
+        return attackTarget.GetComponent<CharacterStats>().CurrentHealth == 0;
     }
 
     public float DistanceFromTarget()
@@ -130,7 +146,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
     //  animation event
     void Attack()
     {
-        if (transform.IsTargetInfront(attackTarget.transform)
+        if (attackTarget != null && transform.IsTargetInfront(attackTarget.transform)
             && DistanceFromTarget() <= enemyStats.AttackRange)
         {
             CharacterStats targetStats = attackTarget.GetComponent<CharacterStats>();
@@ -144,6 +160,10 @@ public class EnemyControllerWithFSM : MonoBehaviour
         enemyStats.isCrit = UnityEngine.Random.value < enemyStats.attackData.critChance;
     }
 
+
+    #endregion
+
+    #region Debugging 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
@@ -151,4 +171,5 @@ public class EnemyControllerWithFSM : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(refreshPoint, patrolRadius);
     }
+    #endregion
 }

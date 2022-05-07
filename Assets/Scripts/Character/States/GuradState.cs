@@ -23,7 +23,7 @@ public class GuardState : EnemyStates
         if (IsPointReached(refreshPoint))
         {
             agent.destination = controller.transform.position;
-            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, refreshRotation, 0.05f);
+            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, refreshRotation, 0.05f); 
             animator.SetBool("Walk", false);
         }
         else
