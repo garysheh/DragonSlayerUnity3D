@@ -7,7 +7,7 @@ public class CharacterStats : MonoBehaviour
 {
     public event Action<int, int> healthBarwithAttack;
     public CharacterData_SO characterStats;
-    private CharacterData_SO characterStats_instance;
+    public CharacterData_SO characterStats_instance;
     public AttackData_SO attackData;
 
     [HideInInspector]

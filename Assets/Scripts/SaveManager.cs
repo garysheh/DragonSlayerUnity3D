@@ -22,20 +22,23 @@ public class SaveManager : Singleton<SaveManager>
             LoadPlayData();
         }
     }
-
+    
     public void SavePlayData()
     {
-        Save(GameManager.Instance.playerStats.characterStats, GameManager.Instance.playerStats.characterStats.name);
+        Debug.Log("save");
+        Save(GameManager.Instance.playerStats.characterStats_instance, GameManager.Instance.playerStats.characterStats.name);
     }
 
     public void LoadPlayData()
     {
-        Load(GameManager.Instance.playerStats.characterStats, GameManager.Instance.playerStats.characterStats.name);
+        Debug.Log("load");
+        Load(GameManager.Instance.playerStats.characterStats_instance, GameManager.Instance.playerStats.characterStats.name);
     }
 
     public void Save(Object data, string key)
     {
-        var jsonData = JsonUtility.ToJson(data);
+        var jsonData = JsonUtility.ToJson(data, true);
+        Debug.Log(jsonData);
         PlayerPrefs.SetString(key, jsonData);
         PlayerPrefs.Save();
     }

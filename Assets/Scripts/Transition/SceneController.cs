@@ -26,6 +26,8 @@ public class SceneController : Singleton<SceneController>
                 StartCoroutine(Transition(SceneManager.GetActiveScene().name, transitionPoint.destinationTag));
                 break;
             case TransitionPoint.TransitionType.DifferentScene:
+                Debug.Log("scene: " + transitionPoint.sceneName);
+                Debug.Log("tag: " + transitionPoint.destinationTag);
                 StartCoroutine(Transition(transitionPoint.sceneName, transitionPoint.destinationTag));
                 break; 
         }

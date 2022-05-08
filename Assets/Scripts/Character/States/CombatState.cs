@@ -41,7 +41,6 @@ public class CombatState : EnemyStates
             }
             else
             {
-                Debug.Log("in here");
                 agent.isStopped = true;
                 animator.SetBool("Follow", false);
                 //  refresh attack cd
