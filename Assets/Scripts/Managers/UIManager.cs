@@ -1,4 +1,5 @@
-using System;
+using System.Collections;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public Canvas playerInfoCanvas;
     public Canvas settingsCanvas;
+    public Canvas selectCanvas;
     private Button newGameBtn;
     private Button continueBtn;
     private Button settingsBtn;
@@ -20,10 +22,15 @@ public class UIManager : MonoBehaviour
     private Animator aboutPanelAnim;
 
     public Camera mainCamera;
-    public GameObject cm;
+    public CinemachineFreeLook freeLook;
+    public Transform lookAtPoint;
+
+    private bool canRotateCam;
+
     private void Awake()
     {
         playerInfoCanvas.enabled = false;
+        selectCanvas.enabled = false;
 
         newGameBtn = settingsCanvas.transform.GetChild(1).GetComponent<Button>();
         continueBtn = settingsCanvas.transform.GetChild(2).GetComponent<Button>();
@@ -45,9 +52,34 @@ public class UIManager : MonoBehaviour
         quitBtn.onClick.AddListener(QuitGame);
     }
 
+    private void Update()
+    {
+        RotateCam();
+        if (IsRotationDone())
+        {
+            selectCanvas.enabled = true;
+            canRotateCam = false;
+        }
+    }
+
     void NewGame()
     {
+        PlayerPrefs.DeleteAll();
+        canRotateCam = true;
+            
+    }
 
+    void RotateCam()
+    {
+        if (canRotateCam)
+        {
+            mainCamera.transform.rotation = Quaternion.RotateTowards(mainCamera.transform.rotation, lookAtPoint.rotation, 0.5f);
+        }
+    }
+
+    bool IsRotationDone()
+    {
+        return Quaternion.Angle(mainCamera.transform.rotation, lookAtPoint.rotation) < 0.1f;
     }
 
     void Continue()
