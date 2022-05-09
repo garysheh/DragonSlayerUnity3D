@@ -67,4 +67,16 @@ public class SceneController : Singleton<SceneController>
         }
            return null;
     }
+
+    //IEnumerator LoadScene(string scene)
+    //{
+    //    if (scene != "")
+    //    {
+    //        yield return SceneManager.LoadSceneAsync(scene);
+    //        yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);
+    //
+    //        SaveManager.Instance.SavePlayData();
+    //        yield break;
+    //    }
+    //}
 }
