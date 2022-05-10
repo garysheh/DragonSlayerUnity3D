@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
      
     public CharacterStats playerStats;
+    public Camera mainCamera;
 
     private CinemachineFreeLook freeLook;
 
@@ -31,8 +32,8 @@ public class GameManager : Singleton<GameManager>
         freeLook = FindObjectOfType<CinemachineFreeLook>();
         if(freeLook != null)
         {
-            freeLook.Follow = playerStats.transform.GetChild(3);
-            freeLook.LookAt = playerStats.transform.GetChild(3);
+            freeLook.Follow = playerStats.transform.GetChild(2);
+            freeLook.LookAt = playerStats.transform.GetChild(2);
         } 
     }
 
@@ -43,6 +44,27 @@ public class GameManager : Singleton<GameManager>
         else
             return true;
     }
+
+    public void SelectWizard()
+    {
+        GameObject.Destroy(GameObject.Find("Knight"));
+        GameObject.Find("PolyArtWizardStandardMat").GetComponent<PlayerController>().enabled = true;
+        TurnOnCineBrain();
+    }
+
+    public void SelectHero()
+    {
+        GameObject.Destroy(GameObject.Find("PolyArtWizardStandardMat"));
+        GameObject.Find("Knight").GetComponent<PlayerController>().enabled = true;
+        TurnOnCineBrain();
+    }
+
+    void TurnOnCineBrain()
+    {
+        mainCamera.GetComponent<CinemachineBrain>().enabled = true;
+    }
+
+
 
     //public Transform GetEntrance()
     //{
@@ -55,4 +77,4 @@ public class GameManager : Singleton<GameManager>
     //    }
     //    return null;
     //}
- }
+}
