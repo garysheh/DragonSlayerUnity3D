@@ -1,6 +1,7 @@
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
@@ -94,12 +95,14 @@ public class UIManager : Singleton<UIManager>
                 ShowMenu();
             }
         }
-
-        RotateCam();
-        if (IsRotationDone())
+        if (SceneManager.GetActiveScene().name == "StartScene")
         {
-            selectCanvas.enabled = true;
-            canRotateCam = false;
+            RotateCam();
+            if (IsRotationDone())
+            {
+                selectCanvas.enabled = true;
+                canRotateCam = false;
+            }
         }
     }
 
