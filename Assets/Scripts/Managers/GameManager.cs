@@ -47,7 +47,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SelectWizard()
     {
-        GameObject.Destroy(GameObject.Find("Knight"));
+        GameObject.Destroy(GameObject.Find("DogPolyart"));
         GameObject.Find("PolyArtWizardStandardMat").GetComponent<PlayerController>().enabled = true;
         TurnOnCineBrain();
     }
@@ -55,7 +55,7 @@ public class GameManager : Singleton<GameManager>
     public void SelectHero()
     {
         GameObject.Destroy(GameObject.Find("PolyArtWizardStandardMat"));
-        GameObject.Find("Knight").GetComponent<PlayerController>().enabled = true;
+        GameObject.Find("DogPolyart").GetComponent<PlayerController>().enabled = true;
         TurnOnCineBrain();
     }
 

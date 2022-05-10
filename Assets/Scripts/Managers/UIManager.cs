@@ -3,7 +3,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     [Header("Canvas")]
     public Canvas playerInfoCanvas;
@@ -36,12 +36,15 @@ public class UIManager : MonoBehaviour
 
     private bool canRotateCam;
     private bool isGameOn;
-
-    private void Awake()
+    private bool isMenuOn;
+    protected override void Awake()
     {
+        base.Awake();
+
         playerInfoCanvas.enabled = false;
         selectCanvas.enabled = false;
         isGameOn = false;
+        isMenuOn = true;
 
         newGameBtn = settingsCanvas.transform.GetChild(1).GetComponent<Button>();
         continueBtn = settingsCanvas.transform.GetChild(2).GetComponent<Button>();
@@ -64,19 +67,32 @@ public class UIManager : MonoBehaviour
 
         newGameBtn.onClick.AddListener(NewGame);
         continueBtn.onClick.AddListener(Continue);
-        settingsBtn.onClick.AddListener(Settings);
+        //settingsBtn.onClick.AddListener(Settings);
         aboutBtn.onClick.AddListener(About);
         quitBtn.onClick.AddListener(QuitGame);
         wizardBtn.onClick.AddListener(SelectWizard);
         heroBtn.onClick.AddListener(SelectHero);
         saveGameBtn.onClick.AddListener(SaveGame);
+
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ReturnToMainMenu();
+            if (SettingsPanelOnScreen() || AboutPanelOnScreen())
+            {
+                ReturnToMainMenu();
+            }
+            else if (isMenuOn)
+            {
+                HideMenu();
+            }
+            else
+            {
+                ShowMenu();
+            }
         }
 
         RotateCam();
@@ -98,15 +114,7 @@ public class UIManager : MonoBehaviour
         {
             aboutPanelAnim.SetTrigger("BounceOut");
         }
-        titleAnim.SetTrigger("BounceIn");
-        if (isGameOn)
-            saveGameAnim.SetTrigger("BounceIn");
-        else
-            newGameAnim.SetTrigger("BounceIn");
-        continueAnim.SetTrigger("BounceIn");
-        settingsAnim.SetTrigger("BounceIn");
-        aboutAnim.SetTrigger("BounceIn");
-        quitAnim.SetTrigger("BounceIn");
+        ShowOptions();
     }
 
     void RotateCam()
@@ -122,8 +130,56 @@ public class UIManager : MonoBehaviour
         return Quaternion.Angle(mainCamera.transform.rotation, lookAtPoint.rotation) < 0.1f;
     }
 
+    void HideTitle()
+    {
+        titleAnim.SetTrigger("BounceOut");
+    }
+
+    void ShowTitle()
+    {
+        titleAnim.SetTrigger("BounceIn");
+    }
+
+    void HideOptions()
+    {
+        if (isGameOn)
+            saveGameAnim.SetTrigger("BounceOut");
+        else
+            newGameAnim.SetTrigger("BounceOut");
+        continueAnim.SetTrigger("BounceOut");
+        settingsAnim.SetTrigger("BounceOut");
+        aboutAnim.SetTrigger("BounceOut");
+        quitAnim.SetTrigger("BounceOut");
+    }
+
+    void ShowOptions()
+    {
+        if (isGameOn)
+            saveGameAnim.SetTrigger("BounceIn");
+        else
+            newGameAnim.SetTrigger("BounceIn");
+        continueAnim.SetTrigger("BounceIn");
+        settingsAnim.SetTrigger("BounceIn");
+        aboutAnim.SetTrigger("BounceIn");
+        quitAnim.SetTrigger("BounceIn");
+    }
+
+    void HideMenu()
+    {
+        HideTitle();
+        HideOptions();
+        isMenuOn = false;
+    }
+
+    void ShowMenu()
+    {
+        ShowTitle();
+        ShowOptions();
+        isMenuOn = true;
+    }
+
     #region Menu
-    void NewGame()
+    public void NewGame()
     {
         titleAnim.ResetTrigger("BounceIn");
         if (isGameOn)
@@ -137,23 +193,15 @@ public class UIManager : MonoBehaviour
 
         PlayerPrefs.DeleteAll();
         canRotateCam = true;
-        titleAnim.SetTrigger("BounceOut");
-        if (isGameOn)
-            saveGameAnim.SetTrigger("BounceOut");
-        else
-            newGameAnim.SetTrigger("BounceOut");
-        continueAnim.SetTrigger("BounceOut");
-        settingsAnim.SetTrigger("BounceOut");
-        aboutAnim.SetTrigger("BounceOut");
-        quitAnim.SetTrigger("BounceOut");
+        HideMenu();
     }
 
-    void Continue()
+    public void Continue()
     {
 
     }
 
-    void Settings()
+    public void Settings()
     {
         titleAnim.ResetTrigger("BounceIn");
         if (isGameOn)
@@ -165,14 +213,7 @@ public class UIManager : MonoBehaviour
         aboutAnim.ResetTrigger("BounceIn");
         quitAnim.ResetTrigger("BounceIn");
 
-        if (isGameOn)
-            saveGameAnim.SetTrigger("BounceOut");
-        else
-            newGameAnim.SetTrigger("BounceOut");
-        continueAnim.SetTrigger("BounceOut");
-        settingsAnim.SetTrigger("BounceOut");
-        aboutAnim.SetTrigger("BounceOut");
-        quitAnim.SetTrigger("BounceOut");
+        HideOptions();
         settingsPanelAnim.SetTrigger("BounceIn");
     }
 
@@ -181,7 +222,7 @@ public class UIManager : MonoBehaviour
         return settingsPanelAnim.transform.position.y >= -800;
     }
 
-    void About()
+    public void About()
     {
         titleAnim.ResetTrigger("BounceIn");
         if (isGameOn)
@@ -193,14 +234,7 @@ public class UIManager : MonoBehaviour
         aboutAnim.ResetTrigger("BounceIn");
         quitAnim.ResetTrigger("BounceIn");
 
-        if (isGameOn)
-            saveGameAnim.SetTrigger("BounceOut");
-        else
-            newGameAnim.SetTrigger("BounceOut");
-        continueAnim.SetTrigger("BounceOut");
-        settingsAnim.SetTrigger("BounceOut");
-        aboutAnim.SetTrigger("BounceOut");
-        quitAnim.SetTrigger("BounceOut");
+        HideOptions();
         aboutPanelAnim.SetTrigger("BounceIn");
     }
 
@@ -209,12 +243,12 @@ public class UIManager : MonoBehaviour
         return aboutPanelAnim.transform.position.y >= -800;
     }
 
-    void QuitGame()
+    public void QuitGame()
     {
         Application.Quit();
     }
 
-    void SaveGame()
+    public void SaveGame()
     {
 
     }
@@ -238,7 +272,7 @@ public class UIManager : MonoBehaviour
         isGameOn = true;
         saveGameAnim.SetBool("IsGameOn", isGameOn);
         selectCanvas.gameObject.SetActive(false);
-
+        newGameAnim.enabled = false;
         playerInfoCanvas.enabled = true;
     }
     #endregion
