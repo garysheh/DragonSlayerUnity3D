@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 2951639916760019008}
   - component: {fileID: 2944502409816998064}
   - component: {fileID: 3770794612344061139}
+  - component: {fileID: 2132986834}
+  - component: {fileID: 2132986833}
   m_Layer: 0
   m_Name: Portal 4
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -26,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2921209528705637768}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.8982041, y: 0.00010061264, z: 39.220886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -99,9 +101,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975d658eabf0843c8ba9ba9ef676cbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
-  transitionType: 0
-  destinationTag: 0
+  sceneName: TownScene
+  transitionType: 1
+  destinationTag: 6
+  transON: 0
+--- !u!54 &2132986834
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921209528705637768}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2132986833
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921209528705637768}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.1028247, y: 1.2811768, z: 3.2765348}
+  m_Center: {x: -0.024905564, y: 0.64077437, z: -6.320609e-11}
 --- !u!1 &2921270340778993086
 GameObject:
   m_ObjectHideFlags: 0
@@ -9991,7 +10023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2922508660257338026}
-  - component: {fileID: 8416956127335839864}
+  - component: {fileID: 2132986832}
   m_Layer: 0
   m_Name: PotalPoint
   m_TagString: Untagged
@@ -10014,7 +10046,7 @@ Transform:
   m_Father: {fileID: 2926972737885776596}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8416956127335839864
+--- !u!114 &2132986832
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10023,7 +10055,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2922508660257338027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82cb512415e054ce69196b921be3fdb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 096018e03718a44a0931b961eb6a29fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationTag: 0
+  destinationTag: 1

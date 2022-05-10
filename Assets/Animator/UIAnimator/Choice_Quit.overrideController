@@ -7,5 +7,9 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Choice_Quit
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: a7dabb3fb632c4e75906bbba456d2e31, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8e7a94c3203f74cd1a81e98fefc790eb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 952e8a95408b0496db45ec891adcd533, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f50de52df7da948a8a84017672a5f858, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5d082da51013b4f3ea874d843d9252a7, type: 2}

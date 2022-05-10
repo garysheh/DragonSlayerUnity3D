@@ -74,11 +74,12 @@ public class PlayerController : MonoBehaviour
     {
         MouseController.Instance.OnMouseClicked += MoveToTarget;
         MouseController.Instance.OnEnemyClicked += AttackEnemy;
+        GameManager.Instance.RigisterPlayer(characterStats);
     }
 
     void Start()
     {
-        GameManager.Instance.RigisterPlayer(characterStats);
+        //GameManager.Instance.RigisterPlayer(characterStats);
     }
 
     void OnDisable()
@@ -136,6 +137,8 @@ public class PlayerController : MonoBehaviour
                 // refresh cooldown
                 cd = characterStats.attackData.attackCD;
             }
+
+
         }
     }
 

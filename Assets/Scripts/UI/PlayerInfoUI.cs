@@ -16,9 +16,12 @@ public class PlayerInfoUI : MonoBehaviour
 
     private void Update()
     {
-        UpdateHealth();
-        UpdateExp();
-        UpdateLevel();
+        if (GameManager.Instance.playerStats != null)
+        {
+            UpdateHealth();
+            UpdateExp();
+            UpdateLevel();
+        }
     }
 
     private void UpdateHealth()
