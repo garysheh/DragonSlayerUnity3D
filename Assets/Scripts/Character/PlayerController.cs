@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float cd; // normal attack cooldown
     private bool deadmode; // when player is dead
     private float stopDistance;
+    public float skillCD;
+    public bool isSkillTriggered;
 
     void Update()
     {
@@ -39,7 +41,17 @@ public class PlayerController : MonoBehaviour
 
         AnimationControl();
         cd -= Time.deltaTime;
+        skillCD -= Time.deltaTime;
         deadmode = characterStats.CurrentHealth == 0;
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (skillCD < 0)
+            {
+                characterStats.isCrit = true;
+                isSkillTriggered = true;
+            }
+        }
     }
     /*
     void Rotate(Vector2 input)
@@ -68,6 +80,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
         stopDistance = agent.stoppingDistance;
+
+        skillCD = characterStats.SkillCD;
     }
 
     void OnEnable()
@@ -110,7 +124,9 @@ public class PlayerController : MonoBehaviour
         if (target != null)
         {
             attackEnemy = target;
-            characterStats.isCrit = UnityEngine.Random.value < characterStats.attackData.critChance;
+            if(!isSkillTriggered)
+                characterStats.isCrit = UnityEngine.Random.value < characterStats.attackData.critChance;
+
             StartCoroutine(MoveToEnemy());
         }
     }
@@ -129,16 +145,21 @@ public class PlayerController : MonoBehaviour
             }
             // when close to the enemy, character stops
             agent.isStopped = true;
+            
+
             // attack part
             if (cd < 0)
             {
                 animator.SetBool("Critical", characterStats.isCrit);
                 animator.SetTrigger("Attack");
                 // refresh cooldown
+                if (isSkillTriggered)
+                {
+                    skillCD = characterStats.attackData.skillCD;
+                    isSkillTriggered = false;
+                }
                 cd = characterStats.attackData.attackCD;
             }
-
-
         }
     }
 
@@ -148,6 +169,15 @@ public class PlayerController : MonoBehaviour
         {
             var EnemyStats = attackEnemy.GetComponent<CharacterStats>();
             EnemyStats.TakeDamage(characterStats, EnemyStats);
+        }
+    }
+
+    void SkillAttack()
+    {
+        if (deadmode != true)
+        {
+            var EnemyStats = attackEnemy.GetComponent<CharacterStats>();
+            EnemyStats.TakeDamage(characterStats.MaxDamage * 5);
         }
     }
 }

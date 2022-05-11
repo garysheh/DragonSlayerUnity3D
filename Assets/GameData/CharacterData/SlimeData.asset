@@ -18,3 +18,9 @@ MonoBehaviour:
   currentMana: 0
   baseDefence: 2
   currentDefence: 2
+  enemyExp: 5
+  curlevel: 0
+  topLevel: 0
+  expBase: 0
+  curExp: 0
+  levelBuff: 0

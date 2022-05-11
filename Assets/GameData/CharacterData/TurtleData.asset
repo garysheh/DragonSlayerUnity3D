@@ -14,5 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 30
+  maxMana: 0
+  currentMana: 0
   baseDefence: 4
   currentDefence: 4
+  enemyExp: 5
+  curlevel: 0
+  topLevel: 0
+  expBase: 0
+  curExp: 0
+  levelBuff: 0
