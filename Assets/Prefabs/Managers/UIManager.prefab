@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInfoCanvas: {fileID: 0}
   settingsCanvas: {fileID: 0}
+  selectCanvas: {fileID: 0}
   mainCamera: {fileID: 0}
-  cm: {fileID: 0}
+  lookAtPoint: {fileID: 0}

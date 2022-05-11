@@ -6,7 +6,9 @@ public class TransitionDestination : MonoBehaviour
 {
     public enum DestinationTag
     {
-        Grave, Desert, ForestFrontEntry, ForestBackEntry, Polar, TownFrontEntry, TownBackEntry, TownCentralEntry, StartSceneEntry
+        GraveFrontEntry, GraveBackEntry, DesertFrontEntry, DesertBackEntry, ForestFrontEntry,
+        ForestBackEntry, PolarFrontEntry, PolarBackEntry, TownFrontEntry, TownBackEntry,
+        TownCentralEntry, StartSceneEntry
     }
 
     public DestinationTag destinationTag;
