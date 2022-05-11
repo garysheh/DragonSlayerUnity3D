@@ -44,6 +44,60 @@ public class EnemyControllerWithFSM : MonoBehaviour
     //[HideInInspector]
     public bool gameOver;
 
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        enemyStats = GetComponent<CharacterStats>();
+        coll = GetComponent<Collider>();
+        attackTarget = GameObject.FindGameObjectWithTag("Player");
+
+        refreshPoint = transform.position;
+        refreshRotation = transform.rotation;
+        skillCD = enemyStats.SkillCD;
+
+        #region State Machine Initialization
+        enemyFSM = new FSM();
+        var guardState = new GuardState(this, agent, anim, refreshPoint, refreshRotation);
+        var patrolState = new PatrolState(this, agent, anim);
+        var chaseState = new ChaseState(agent, anim, attackTarget);
+        var combatState = new CombatState(this, agent, anim, enemyStats, attackTarget);
+        var deadState = new DeadState(this, agent, anim, coll);
+        var winState = new WinState(this, agent, anim);
+
+        Debug.Log("all states have been initialized");
+        //  when(a, b, c); when "a" is valid go from b to c;
+        When(HasTarget(), guardState, chaseState);
+        When(HasTarget(), patrolState, chaseState);
+        When(TargetInRange(), chaseState, combatState);
+        When(TargetOutOfRange(), combatState, chaseState);
+        When(LostTargetAndWasGuard(), chaseState, guardState);
+        When(LostTargetAndWasPatrol(), chaseState, patrolState);
+        enemyFSM.AddAnyTransition(IsDead(), deadState);
+        enemyFSM.AddAnyTransition(IsWin(), winState);
+
+        if (isGuard)
+        {
+            enemyFSM.SetState(guardState);
+        }
+        else
+        {
+            enemyFSM.SetState(patrolState);
+        }
+        #endregion
+
+        void When(Func<bool> condition, EnemyStates from, EnemyStates to) => enemyFSM.AddTransition(condition, from, to);
+        Func<bool> HasTarget() => () => FoundPlayer();
+        Func<bool> TargetInRange() => () => MaxCombatRange() >= DistanceFromTarget();
+        Func<bool> TargetOutOfRange() => () => MaxCombatRange() < DistanceFromTarget();
+        Func<bool> LostTargetAndWasGuard() => () => !FoundPlayer() && (isGuard == true);
+        Func<bool> LostTargetAndWasPatrol() => () => !FoundPlayer() && (isGuard == false);
+        Func<bool> IsDead() => () => IsHealthZero() == true;
+        Func<bool> IsWin() => () => IsEnemyWin() == true;
+
+        gameOver = false;
+    }
+/*
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -96,7 +150,8 @@ public class EnemyControllerWithFSM : MonoBehaviour
         Func<bool> IsWin() => () => IsEnemyWin() == true;
 
         gameOver = false;
-    } 
+    }
+*/
 
     // Update is called once per frame
     void Update()
