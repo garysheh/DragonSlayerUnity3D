@@ -232,7 +232,7 @@ SkinnedMeshRenderer:
   m_RootBone: {fileID: 2172365836597074297}
   m_AABB:
     m_Center: {x: 0.0023155212, y: -0.50467485, z: 0.9505632}
-    m_Extent: {x: 2.62731, y: 1.6139781, z: 1.7910836}
+    m_Extent: {x: 2, y: 1.5, z: 1.5}
   m_DirtyAABB: 0
 --- !u!1 &2172365836597560601
 GameObject:
@@ -352,7 +352,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2172365836597560603}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 2
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -392,8 +392,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3, y: 2, z: 3}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2172365836597560605
 GameObject:
   m_ObjectHideFlags: 0

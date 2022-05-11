@@ -44,7 +44,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
     //[HideInInspector]
     public bool gameOver;
 
-    private void Awake()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();

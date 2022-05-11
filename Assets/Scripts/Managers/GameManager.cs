@@ -39,10 +39,11 @@ public class GameManager : Singleton<GameManager>
 
     public bool IsPlayerAlive()
     {
-        if (playerStats != null)
-            return playerStats.CurrentHealth != 0;
-        else
+        if (playerStats != null && playerStats.CurrentHealth != 0)
             return true;
+        else if (playerStats.CurrentHealth == 0)
+            return false;
+        return false;
     }
 
     public void SelectWizard()
