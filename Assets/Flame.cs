@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class Flame : MonoBehaviour
+public class Flame : Skill
 {
     public VisualEffect flame;
 
@@ -21,4 +21,6 @@ public class Flame : MonoBehaviour
     {
         flame.Stop();
     }
+
+
 }
