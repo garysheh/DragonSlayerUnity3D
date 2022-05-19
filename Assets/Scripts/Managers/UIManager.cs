@@ -118,6 +118,7 @@ public class UIManager : Singleton<UIManager>
             aboutPanelAnim.SetTrigger("BounceOut");
         }
         ShowOptions();
+        
     }
 
     void RotateCam()
@@ -207,43 +208,37 @@ public class UIManager : Singleton<UIManager>
     public void Settings()
     {
         titleAnim.ResetTrigger("BounceIn");
-        if (isGameOn)
-            saveGameAnim.ResetTrigger("BounceIn");
-        else
-            newGameAnim.ResetTrigger("BounceIn");
-        continueAnim.ResetTrigger("BounceIn");
-        settingsAnim.ResetTrigger("BounceIn");
-        aboutAnim.ResetTrigger("BounceIn");
-        quitAnim.ResetTrigger("BounceIn");
-
         HideOptions();
+        settingsPanelAnim.ResetTrigger("BounceOut");
+
         settingsPanelAnim.SetTrigger("BounceIn");
     }
 
     bool SettingsPanelOnScreen()
     {
-        return settingsPanelAnim.transform.position.y >= -800;
+        return settingsPanelAnim.transform.position.y > 0;
     }
 
     public void About()
     {
         titleAnim.ResetTrigger("BounceIn");
-        if (isGameOn)
-            saveGameAnim.ResetTrigger("BounceIn");
-        else
-            newGameAnim.ResetTrigger("BounceIn");
-        continueAnim.ResetTrigger("BounceIn");
-        settingsAnim.ResetTrigger("BounceIn");
-        aboutAnim.ResetTrigger("BounceIn");
-        quitAnim.ResetTrigger("BounceIn");
+        //if (isGameOn)
+        //    saveGameAnim.ResetTrigger("BounceIn");
+        //else
+        //    newGameAnim.ResetTrigger("BounceIn");
+        //continueAnim.ResetTrigger("BounceIn");
+        //settingsAnim.ResetTrigger("BounceIn");
+        //aboutAnim.ResetTrigger("BounceIn");
+        //quitAnim.ResetTrigger("BounceIn");
 
         HideOptions();
+        aboutPanelAnim.ResetTrigger("BounceOut");
         aboutPanelAnim.SetTrigger("BounceIn");
     }
 
     bool AboutPanelOnScreen()
     {
-        return aboutPanelAnim.transform.position.y >= -800;
+        return aboutPanelAnim.transform.position.y > 0;
     }
 
     public void QuitGame()
