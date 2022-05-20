@@ -3,24 +3,26 @@
 ##  1.	How to run this project	
   - Create a new **URP 3d project** on UnityHub
   - Import this project in unity
-  - Add **all** scenes, under foler **Assets/Scenes**, to **build setting**
-  - Install **Cinemachine**
-  - Open **StartScene** and run 
+  - Add **all** scenes, under the foler **Assets/Scenes**, to **build setting**
+  - Install **Cinemachine** in **Package Manager**
+  - Open **StartScene** under the foler **Assets/Scenes**
+  - **RUN IT**
 
 ##  2.	How to control
   - Move: right click on ground
   -	Rotation: user keys **A and D**
+  - Zoom: use mouse wheel
   - Normal attack: right click on enemy
   - Skill attack: prese key **Q** once and right click on enemy (Skill attack has 3sec cool down)
 
 ##  3.  Rubric 
-  - Game Idea: Dragons bring evil creatures to the world and the small town is in danger now. A hero is chosen to defeat dragons and protect the town and its people
-  - Game elements: There are two main characters for players to choose, vary of enemies including dragons and four well-designed maps with different theme for players to explore.
-  - Mechanics: Players can move the main character around and zoom and rotate the camera. Character has two ways of attack, normal attack and skill. Enemies have a baisc FSM based AI providing them behaviors like patrol, guard, chase, and combat. Some enemies have skills to cause dizziness to player. 
-  - Physics: Dragons' flame is made by VFX. Golem will throw rocks to player. The rocks has a physic rigidbody attached.
-  - Animation: Game UI has a self-designed smooth animations while characters use animations downloaded.
-  - Aesthetics: Most objects in game is in low-poly style. A background music is applied to all scenes.
-  - UI: The game has a well-design menu that can be open/close at every sence.
+  - **Game Idea**: Dragons bring evil creatures to the world and the small town is in danger now. A hero is chosen to defeat dragons and protect the town and its people
+  - **Game elements**: There are two main characters for players to choose, vary of enemies including dragons and four well-designed maps with different theme for players to explore.
+  - **Mechanics**: Players can move the main character around and zoom and rotate the camera. Character has two ways of attack, normal attack and skill. Enemies have a baisc FSM based AI providing them behaviors like patrol, guard, chase, and combat. Some enemies have skills to cause dizziness to player. 
+  - **Physics**: Dragons' flame is made by VFX. Golem will throw rocks to player. The rocks has a physic rigidbody attached.
+  - **Animation**: Game UI has a self-designed smooth animations while characters use animations downloaded.
+  - **Aesthetics**: Most objects in game is in low-poly style. A background music is applied to all scenes.
+  - **UI**: The game has a well-design menu that can be open/close at every sence.
 
 ##  4.  Reference
 ### Tutorials watched
@@ -36,7 +38,10 @@
   - https://www.youtube.com/watch?v=XKUdmz5VFbY&ab_channel=SingleSaplingGames
   - https://www.youtube.com/watch?v=cuQao3hEKfs&ab_channel=Brackeys
   - https://www.youtube.com/watch?v=Knea9YmJGl4&ab_channel=inScopeStudios
+  - https://www.youtube.com/watch?v=xNHSGMKtlv4
+
 ### Unity Assets Used
+  - Audio assets https://umb.umassonline.net/webapps/blackboard/execute/content/file?cmd=view&content_id=_1979431_1&course_id=_45148_1&framesetWrapped=true
   - Cross_Plains - Lowpoly Environment by Unvik_3D https://assetstore.unity.com/packages/3d/environments/landscapes/cross-plains-lowpoly-environment-by-unvik-3d-203644
   - Dog Knight PBR Polyart https://assetstore.unity.com/packages/3d/characters/animals/dog-knight-pbr-polyart-135227#description
   - Dragon for Boss Monster : HP https://assetstore.unity.com/packages/3d/characters/creatures/dragon-for-boss-monster-hp-79398#description
