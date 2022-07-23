@@ -99,7 +99,7 @@ public class EnemyControllerWithFSM : MonoBehaviour
     } 
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //  attack timer
         attackCD -= Time.deltaTime;
