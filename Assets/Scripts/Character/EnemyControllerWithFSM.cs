@@ -67,12 +67,12 @@ public class EnemyControllerWithFSM : MonoBehaviour
 
         Debug.Log("all states have been initialized");
         //  when(a, b, c); when "a" is valid go from b to c;
-        When(HasTarget(), guardState, chaseState);
-        When(HasTarget(), patrolState, chaseState);
-        When(TargetInRange(), chaseState, combatState);
-        When(TargetOutOfRange(), combatState, chaseState);
-        When(LostTargetAndWasGuard(), chaseState, guardState);
-        When(LostTargetAndWasPatrol(), chaseState, patrolState);
+        // When(HasTarget(), guardState, chaseState);
+        // When(HasTarget(), patrolState, chaseState);
+        // When(TargetInRange(), chaseState, combatState);
+        // When(TargetOutOfRange(), combatState, chaseState);
+        // When(LostTargetAndWasGuard(), chaseState, guardState);
+        // When(LostTargetAndWasPatrol(), chaseState, patrolState);
         enemyFSM.AddAnyTransition(IsDead(), deadState);
         enemyFSM.AddAnyTransition(IsWin(), winState);
 

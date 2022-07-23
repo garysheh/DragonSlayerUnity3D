@@ -43,6 +43,7 @@
 ### Unity Assets Used
   - Audio assets https://umb.umassonline.net/webapps/blackboard/execute/content/file?cmd=view&content_id=_1979431_1&course_id=_45148_1&framesetWrapped=true
   - Cross_Plains - Lowpoly Environment by Unvik_3D https://assetstore.unity.com/packages/3d/environments/landscapes/cross-plains-lowpoly-environment-by-unvik-3d-203644
+  - Dynamic Music https://assetstore.unity.com/packages/audio/music/dynamic-music-35925
   - Dog Knight PBR Polyart https://assetstore.unity.com/packages/3d/characters/animals/dog-knight-pbr-polyart-135227#description
   - Dragon for Boss Monster : HP https://assetstore.unity.com/packages/3d/characters/creatures/dragon-for-boss-monster-hp-79398#description
   - Dragon the Soul Eater and Dragon Boar https://assetstore.unity.com/packages/3d/characters/creatures/dragon-the-soul-eater-and-dragon-boar-77121#description
