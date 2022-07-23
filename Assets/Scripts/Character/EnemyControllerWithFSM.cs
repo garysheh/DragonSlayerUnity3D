@@ -76,26 +76,26 @@ public class EnemyControllerWithFSM : MonoBehaviour
         // enemyFSM.AddAnyTransition(IsDead(), deadState);
         // enemyFSM.AddAnyTransition(IsWin(), winState);
 
-        if (isGuard)
-        {
-            enemyFSM.SetState(guardState);
-        }
-        else
-        {
-            enemyFSM.SetState(patrolState);
-        }
-        #endregion
+        // if (isGuard)
+        // {
+        //     enemyFSM.SetState(guardState);
+        // }
+        // else
+        // {
+        //     enemyFSM.SetState(patrolState);
+        // }
+        // #endregion
 
-        void When(Func<bool> condition, EnemyStates from, EnemyStates to) => enemyFSM.AddTransition(condition, from, to);
-        Func<bool> HasTarget() => () => FoundPlayer();
-        Func<bool> TargetInRange() => () => MaxCombatRange() >= DistanceFromTarget();
-        Func<bool> TargetOutOfRange() => () => MaxCombatRange() < DistanceFromTarget();
-        Func<bool> LostTargetAndWasGuard() => () => !FoundPlayer() && (isGuard == true);
-        Func<bool> LostTargetAndWasPatrol() => () => !FoundPlayer() && (isGuard == false);
-        Func<bool> IsDead() => () => IsHealthZero() == true;
-        Func<bool> IsWin() => () => IsEnemyWin() == true;
+        // void When(Func<bool> condition, EnemyStates from, EnemyStates to) => enemyFSM.AddTransition(condition, from, to);
+        // Func<bool> HasTarget() => () => FoundPlayer();
+        // Func<bool> TargetInRange() => () => MaxCombatRange() >= DistanceFromTarget();
+        // Func<bool> TargetOutOfRange() => () => MaxCombatRange() < DistanceFromTarget();
+        // Func<bool> LostTargetAndWasGuard() => () => !FoundPlayer() && (isGuard == true);
+        // Func<bool> LostTargetAndWasPatrol() => () => !FoundPlayer() && (isGuard == false);
+        // Func<bool> IsDead() => () => IsHealthZero() == true;
+        // Func<bool> IsWin() => () => IsEnemyWin() == true;
 
-        gameOver = false;
+        // gameOver = false;
     } 
 
     // Update is called once per frame
