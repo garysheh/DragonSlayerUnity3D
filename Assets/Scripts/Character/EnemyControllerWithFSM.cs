@@ -73,8 +73,8 @@ public class EnemyControllerWithFSM : MonoBehaviour
         // When(TargetOutOfRange(), combatState, chaseState);
         // When(LostTargetAndWasGuard(), chaseState, guardState);
         // When(LostTargetAndWasPatrol(), chaseState, patrolState);
-        enemyFSM.AddAnyTransition(IsDead(), deadState);
-        enemyFSM.AddAnyTransition(IsWin(), winState);
+        // enemyFSM.AddAnyTransition(IsDead(), deadState);
+        // enemyFSM.AddAnyTransition(IsWin(), winState);
 
         if (isGuard)
         {
