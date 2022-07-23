@@ -63,19 +63,19 @@ public class FSM
         anyTransitions.Add(new Transition(condition, to));
     }
 
-    private class Transition
-    {
-        //  Condition to enter the state
-        public Func<bool> Condition { get; }
-        //  The state wants to go
-        public EnemyStates To { get; }
+    // private class Transition
+    // {
+    //     //  Condition to enter the state
+    //     public Func<bool> Condition { get; }
+    //     //  The state wants to go
+    //     public EnemyStates To { get; }
 
-        public Transition (Func<bool> condition, EnemyStates to)
-        {
-            Condition = condition;
-            To = to;
-        }
-    }
+    //     public Transition (Func<bool> condition, EnemyStates to)
+    //     {
+    //         Condition = condition;
+    //         To = to;
+    //     }
+    // }
 
     private Transition GetTransition()
     {
